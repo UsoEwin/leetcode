@@ -1,4 +1,4 @@
-//anagramMap
+//760. Find Anagram Mappings 
 class Solution {
 public:
     vector<int> anagramMappings(vector<int>& A, vector<int>& B) {
@@ -15,7 +15,8 @@ public:
         return result;
     }
 };
-//check possibility
+
+//665. Non-decreasing Array
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {
@@ -37,7 +38,9 @@ public:
 		return true;    
     }
 };
-//hamming dis
+
+
+//461. Hamming Distance
 class Solution {
 public:
     int hammingDistance(int x, int y) {
@@ -55,7 +58,7 @@ public:
     }
 };
 
-//
+//476. Number Complement
 class Solution {
 public:
     int findComplement(int num) {
@@ -77,7 +80,8 @@ public:
         }
     }
 };
-//jewler
+
+//771. Jewels and Stones
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
@@ -92,7 +96,8 @@ public:
         return counter;
     }
 };
-//
+
+//657. Judge Route Circle
 class Solution {
 public:
     bool judgeCircle(string moves) {
@@ -106,7 +111,8 @@ public:
         return true;
     }
 };
-//
+
+//412. Fizz Buzz
 class Solution {
 public:
     vector<string> fizzBuzz(int n) {
@@ -123,7 +129,8 @@ public:
         return result;
     }
 };
-//
+
+//344. Reverse String
 class Solution {
 public:
     string reverseString(string s) {
@@ -132,7 +139,8 @@ public:
         return s;
     }
 };
-//
+
+//728. Self Dividing Numbers
 class Solution {
 public:
     vector<int> selfDividingNumbers(int left, int right) {
@@ -174,7 +182,8 @@ public:
         return vec;
     }
 };
-//
+
+//169. Majority Element
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -189,6 +198,7 @@ public:
     }
 };
 
+//151. Reverse Words in a String
 class Solution {
 public:
     string reverseWords(string s) {
@@ -240,6 +250,7 @@ public:
     }
     
 };
+
 class Solution {
 public:
     string reverseWords(string s)
@@ -262,7 +273,8 @@ public:
         return s;
     }
 };
-//keyboard
+
+//500. Keyboard Row
 class Solution {
 public:
     vector<string> findWords(vector<string>& words) {
@@ -277,6 +289,8 @@ public:
         return ret;
     }
 };
+
+//485. Max Consecutive Ones
 class Solution {
 public:
     int findMaxConsecutiveOnes(vector<int>& nums) {
