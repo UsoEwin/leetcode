@@ -303,3 +303,60 @@ public:
         return max1;
     }
 };
+
+//21. Merge Two Sorted Lists
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode *ptr1 = l1, *ptr2 = l2;
+        ListNode *head = new ListNode(0);
+        ListNode *prev_next = head;
+        while(ptr1 != NULL || ptr2 != NULL){
+            if(ptr1 == NULL){
+                //insert ptr2
+                ListNode *new_node = new ListNode(ptr2->val);
+                prev_next->next = new_node;
+                prev_next = new_node;
+                ptr2 = ptr2->next;
+            }
+            else if(ptr2 == NULL){
+                ListNode *new_node = new ListNode(ptr1->val);
+                prev_next->next = new_node;
+                prev_next = new_node;
+                ptr1 = ptr1->next;
+            }
+            else{
+                //both not empty
+                if(ptr2->val <= ptr1->val){
+                    ListNode * new_node = new ListNode(ptr2->val);
+                    prev_next->next = new_node;
+                    prev_next = new_node;
+                    ptr2 = ptr2->next;
+                }
+                else{
+                    ListNode *new_node = new ListNode(ptr1->val);
+                    prev_next->next = new_node;
+                    prev_next = new_node;
+                    ptr1 = ptr1->next;
+                    }
+                
+            }
+        }
+        return head->next;
+    }
+};
+
+//69. Sqrt(x)
+class Solution {
+public:
+    int mySqrt(int x) {
+    
+        if(x == 2 || x == 1) return 1;
+        else if(x == 0) return 0;
+        unsigned int i = 0;
+        for(; i < x; ++i){
+            if(i*i<=x && (i+1)*(i+1)>x)
+                return i;
+        }
+    }
+};
