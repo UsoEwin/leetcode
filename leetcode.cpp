@@ -360,3 +360,73 @@ public:
         }
     }
 };
+
+//2. Add Two Numbers
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        ListNode *p1 = l1,*p2 = l2, *ret = new ListNode(0);
+        ListNode *cur = ret, *nxt = ret;
+        int carry = 0;
+        int sum = 0;
+        while(p1 != NULL || p2 != NULL)
+        {
+            if(carry  == 1)
+            {   
+                if(p1 != NULL && p2 != NULL)
+                sum = p1->val + p2->val + 1;
+                
+                else if(p1 == NULL) 
+                    sum = p2->val + 1;
+                
+                else
+                    sum = p1->val + 1;
+                
+                nxt = new ListNode((sum)%10);
+                if (sum >= 10) carry = 1;
+                else carry = 0;
+                cur->next = nxt;
+                cur = nxt;
+                
+                
+            }
+            else
+            {  
+                if(p1 != NULL && p2 != NULL)
+                sum = p1->val + p2->val;
+                
+                else if(p1 == NULL) 
+                    sum = p2->val;
+                
+                else
+                    sum = p1->val;
+                
+                nxt = new ListNode((sum)%10);
+                if (sum >= 10) carry = 1;
+                else carry = 0;
+                cur->next = nxt;
+                cur = nxt;
+            }
+            if(p1 != NULL && p2 != NULL){
+            p1 = p1->next;
+            p2 = p2->next;
+            }
+            else if(p1 == NULL)
+                p2 = p2->next;
+            else
+                p1 = p1->next;
+        }
+        if(carry == 1)
+            cur->next = new ListNode(1);
+        return ret->next;
+    }
+};
