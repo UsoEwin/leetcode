@@ -12,6 +12,7 @@ public:
         {
         	result.push_back(hash[A[j]]);
         }
+        delet [] hash;
         return result;
     }
 };
@@ -428,5 +429,40 @@ public:
         if(carry == 1)
             cur->next = new ListNode(1);
         return ret->next;
+    }
+};
+//3. Longest Substring Without Repeating Characters
+class Solution {
+public:
+int lengthOfLongestSubstring(string s) {
+        
+        vector <int> record(256,-11); //need 256 slot since ascii
+        int start = -1, maxlen = 0;
+        for(int i = 0; i < s.length(); ++i) {
+            if(record[s[i]] > start)
+                start = record[s[i]];  //renew the start point
+            record[s[i]] = i;
+            maxlen = max(maxlen,i-start);
+        }
+    return maxlen;
+    }
+};
+//20. Valid Parentheses
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> container;
+        for(char &c : s) {
+            if(container.empty())
+                container.push(c);
+            else if( (c == ')' && container.top() == '(') || (c == ']' && container.top() == '[') ||  (c == '}' && container.top() == '{') )
+                container.pop();
+            else
+                container.push(c);
+        }
+        if(container.empty())
+            return true;
+        else
+            return false;
     }
 };
