@@ -432,6 +432,16 @@ public:
     }
 };
 //3. Longest Substring Without Repeating Characters
+//this should also be able to be done in map
+/*
+        map<int,int> all;
+        for(int i=0;i<nums.size();i++){
+            all[nums[i]] +=1;
+        }
+        for(map<int,int>::iterator it=all.begin(); it!=all.end(); it++){
+            if(it->second>nums.size()/2) return it->first;
+        }
+*/
 class Solution {
 public:
 int lengthOfLongestSubstring(string s) {
@@ -464,5 +474,23 @@ public:
             return true;
         else
             return false;
+    }
+};
+//674. Longest Continuous Increasing Subsequence
+//similar to 3
+class Solution {
+public:
+    int findLengthOfLCIS(vector<int>& nums) {
+        
+        int start  = -1, maxlen = 1;
+        if(nums.size() == 1) return 1;
+        if(nums.size() == 0) return 0;
+        for(int i = 1; i <nums.size(); i++)
+        {
+            if(nums[i] <= nums[i-1])
+                start = i-1;
+            maxlen = max(maxlen,i-start);
+        }
+            return maxlen;
     }
 };
