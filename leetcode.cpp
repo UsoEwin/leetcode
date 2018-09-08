@@ -494,3 +494,21 @@ public:
             return maxlen;
     }
 };
+//66. Plus One
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int carry = 1;
+        vector<int> ret;
+        
+        for(int i = digits.size()-1; i>=0; i--){
+            ret.insert(ret.begin(),(digits[i]+carry)%10);
+            if(digits[i]+carry >= 10) carry = 1;
+            else carry  = 0;
+        }
+        if(carry == 1)//indicates one more
+            ret.insert(ret.begin(),1);
+
+        return ret;
+    }
+};
