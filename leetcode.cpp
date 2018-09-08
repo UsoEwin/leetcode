@@ -512,3 +512,29 @@ public:
         return ret;
     }
 };
+//366. Find Leaves of Binary Tree
+//O(n)
+class Solution {
+    public:
+    vector<vector<int>> findLeaves(TreeNode* root){
+        vector<vector<int>> ret;
+        int h = height(root);
+        for(int i = 0; i < h+1; ++i) //heigh begins with 0, so there is one more
+            ret.push_back(vector<int>());
+        int p = makeVec(root, ret);
+        return ret;
+    }
+    private:
+    //get the heigh
+    int height(TreeNode* root){
+        if(!root) return -1;
+        return 1 + max(height(root->left),height(root->right));
+    }
+    int makeVec(TreeNode* root, vector<vector<int>>& ret){
+        if (!root) return -1;
+        int level = 1 + max(makeVec(root->right,ret),makeVec(root->left,ret));
+        if(level < ret.size())
+            ret[level].push_back(root->val);
+        return level;
+    }
+};
