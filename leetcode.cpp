@@ -538,3 +538,106 @@ class Solution {
         return level;
     }
 };
+//366. Find Leaves of Binary Tree
+//a better way using unorder set
+class Solution {
+public:
+    vector<vector<int>> findLeaves(TreeNode* root) {        
+        // use map to get all the levels.
+        unordered_map<int, vector<int>> mp; // level->Node_values
+        int n = traverse(root, mp); // return the height of the value.
+        // pass map data to res.
+        vector<vector<int>> res(n + 1, vector<int>());
+        for (int i = 0; i <= n; i++) {
+            res[i] = mp[i];
+        }
+        return res;
+    }
+private:
+    int traverse(TreeNode* root, unordered_map<int, vector<int>>& mp) {
+        if (!root) return -1;
+        //leaf node case
+        if (!root->left && !root->right) {
+            mp[0].push_back(root->val);
+            return 0;
+        }
+        int l = traverse(root->left, mp);
+        int r = traverse(root->right, mp);
+        int res = max(l, r) + 1;
+        mp[res].push_back(root->val);
+        return res;
+    }
+};
+//205. Isomorphic Strings
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        vector<pair<int,int> > hash1(256,pair<int,int>(0,0));
+        vector<pair<int,int> > hash2(256,pair<int,int>(0,0));
+        for(int i = 0; i < s.length(); ++i){
+            if(hash1[s[i]].first != hash2[t[i]].first || hash2[t[i]].second != hash1[s[i]].second)
+                return false;
+            hash1[s[i]].first = i;
+            hash1[s[i]].second++;
+            hash2[t[i]].first = i;
+            hash2[t[i]].second ++;
+        }
+        return true;
+    }
+};
+//or use unordered set
+class Solution{
+public:
+    bool isIsomorphic(string s, string t) {
+        // patterns: counts (first) and last indices (second)
+        unordered_map<char, pair<int,int>> pat_s, pat_t; 
+        for(int i = 0; i < s.size(); i++)
+        {
+            auto &ps = pat_s[s[i]], &pt = pat_t[t[i]];
+            if(ps.first != pt.first or ps.second != pt.second)
+                return false;
+            ps.first++, pt.first++;
+            ps.second = pt.second = i;
+        }
+        return true;
+    }
+}
+//149. Max Points on a Line
+//my code, using linear algebra O(n^2)
+
+//a god like code, 0ms, random number
+class Solution {
+public:
+    int maxPoints(vector<Point>& points) {
+        if (points.size() <= 2) return points.size();
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> dis(0, points.size() - 1);
+        int best = 1;
+        for (int trial = 0; trial < points.size() + 100; trial++) {
+            int ai = dis(gen);
+            int bi = dis(gen);
+            if (ai == bi) continue;
+            auto &a = points[ai];
+            auto &b = points[bi];
+            Point aa(b.x - a.x, b.y - a.y);
+            if (aa.x == 0 && aa.y == 0) {
+                int score = 0;
+                for (auto p : points) {
+                    if (p.x == a.x && p.y == a.y) {
+                        score++;
+                    }
+                }
+                best = max(best, score);
+                continue;
+            }
+            int score = 0;
+            for (auto p : points) {
+                Point bb(p.x - a.x, p.y - a.y);
+                if ((int64_t)aa.x * (int64_t)bb.y - (int64_t)bb.x * (int64_t)aa.y == 0) score++;
+            }
+            best = max(best, score);
+        }
+        return best;
+    }
+};
