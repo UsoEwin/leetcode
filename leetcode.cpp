@@ -661,3 +661,54 @@ public:
         return head;
     }
 };
+//215. Kth Largest Element in an Array
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        make_heap(nums.begin(),nums.end());
+        for(int i = 1; i < k; ++i)
+        {
+            pop_heap (nums.begin(),nums.end());
+            nums.pop_back();
+        }
+        return nums.front();
+    }
+};
+//this can also be done in partitioning like quick sort
+//cont'd, implement your own heap
+class Solution {
+	public:
+    void sink(vector<int>& heap, int i) {
+        while(true) {
+            int left = (i << 1) + 1;
+            int right = (i << 1) + 2;
+            int largest = i;
+            if(left < heap.size() && heap[largest] < heap[left]) largest = left;
+            if(right < heap.size() && heap[largest] < heap[right]) largest = right;
+            if(i == largest) break;
+            swap(heap[i], heap[largest]);
+            i = largest;
+        }
+    }
+    void make_heap(vector<int>& heap) {
+        for(int i = (heap.size() - 2) >> 1; i >= 0; --i)
+            sink(heap, i);
+    }
+
+    int findKthLargest(vector<int>& nums, int k) {
+        // max heap
+        k = nums.size() - k + 1;
+        vector<int> heap(nums.begin(), nums.begin() + k);
+        make_heap(heap);
+
+        for(int i = k; i < nums.size(); ++i) {
+            if(nums[i] < heap.front()) {
+                // heap.push_back(nums[i]);
+                swap(heap.front(), nums[i]);
+                sink(heap, 0);
+            }
+        }
+
+        return heap.front();
+    }
+};
