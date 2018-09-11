@@ -641,3 +641,23 @@ public:
         return best;
     }
 };
+//206. Reverse Linked List
+//don't forget the initial value
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        
+        ListNode *now,*next,*last;
+        now = head;
+        next = NULL;//otherwise runtime error
+        last = NULL;
+        while(now != NULL){
+            next = now->next;
+            now->next = last;
+            last = now;
+            now = next;
+        }
+        head = last;
+        return head;
+    }
+};
