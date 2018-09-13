@@ -748,3 +748,10 @@ public:
         return (sum-sum2);
     }
 };
+//a bit manipulation version
+int missingNumber(vector<int>& nums) 
+{
+        int size = nums.size(), result = 0;
+        for (int i = 0; i != size; result ^= (i ^ nums[i]), ++i);
+        return result ^ size;
+}
