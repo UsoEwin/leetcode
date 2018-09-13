@@ -699,7 +699,7 @@ class Solution {
         // max heap
         k = nums.size() - k + 1;
         vector<int> heap(nums.begin(), nums.begin() + k);
-        make_heap(heap);
+        (make_heapheap);
 
         for(int i = k; i < nums.size(); ++i) {
             if(nums[i] < heap.front()) {
@@ -708,7 +708,43 @@ class Solution {
                 sink(heap, 0);
             }
         }
-
         return heap.front();
+    }
+};
+//27. Remove Element
+//also can use double pointer
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) 
+    {
+        vector<int> help(0);
+        int count = 0;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            if(nums[i] != val)
+            {
+                help.push_back(nums[i]);
+                count ++;
+            }
+        }
+        for(int i = 0; i<count;i++)
+        {
+            nums[i] = help[i];    
+        }
+        return count;
+    }
+};
+//268. Missing Number
+//sum it up using arithmetic sequence formula
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int sum = 0, sum2 = 0;
+        sum = (nums.size())*(1+nums.size())/2;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            sum2 += nums[i];
+        }
+        return (sum-sum2);
     }
 };
