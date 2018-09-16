@@ -755,3 +755,46 @@ int missingNumber(vector<int>& nums)
         for (int i = 0; i != size; result ^= (i ^ nums[i]), ++i);
         return result ^ size;
 }
+//15. 3Sum
+//notice should discuss sum, initial sorting need nlogn
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> ret;
+        if(nums.size() < 3) return ret;
+        sort(nums.begin(),nums.end());
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(i > 0 && nums[i] == nums [i-1])
+                continue;
+            int lf = i + 1, rg = nums.size() - 1;
+            while(lf < rg)
+                
+            {        
+                int sum = nums[i] + nums[lf] + nums[rg];
+                    if(sum == 0)
+                        
+                    {   
+                       
+                        ret.push_back({nums[i],nums[lf],nums[rg]});
+                        lf++,rg--;
+                        while(lf < rg && nums[lf] == nums[lf-1])
+                        {
+                            lf++;
+                        }
+                        while(lf < rg && nums[rg] == nums[rg+1] && rg < nums.size())
+                        {
+                            rg--;    
+                        }
+                    }
+                    else if(sum < 0)//indicate the left side not big enough
+                    lf++;
+                    else
+                    rg--;
+             
+            }
+            
+        }
+        return ret;
+    }
+};
