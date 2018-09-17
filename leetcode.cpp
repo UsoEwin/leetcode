@@ -798,3 +798,24 @@ public:
         return ret;
     }
 };
+
+//278. First Bad Version
+//basically a binary search
+//notice the upper and lower bound
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        
+        long long l = 0, r = n , id =(l+r)/2;
+        while(l < r + 1)
+        {
+            id = (l + r)/2;
+            if(isBadVersion(id))
+                r = id - 1;
+            else
+                l = id + 1;
+            
+        }
+        return l;
+    }
+};
