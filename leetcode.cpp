@@ -837,3 +837,13 @@ public:
         return l;
     }
 };
+//turn off the synch in system
+//can somehow boost the performance
+//actually not
+/*
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+*/
