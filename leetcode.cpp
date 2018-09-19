@@ -847,3 +847,145 @@ static const auto io_sync_off = [] () {
     return nullptr;
 }();
 */
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+
+struct RListNode {
+   int key;
+   int val;
+   RListNode *next;
+   RListNode *pre;
+   RListNode(int x) : val(x), next(NULL),pre(NULL) {}
+};
+
+
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+
+
+
+
+//dont use consecutive data structure like 
+//辅助一个map，实现key的快速查找
+#include<iostream>
+#include<unordered_map>
+using namespace std;
+
+struct RListNode {
+   int key;
+   int val;
+   RListNode *next;
+   RListNode *pre;
+   RListNode(int x) : val(x), next(NULL),pre(NULL) {}
+};
+
+
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+
+
+
+
+//dont use consecutive data structure like 
+//辅助一个map，实现key的快速查找
+class LRUCache {
+private:
+    unordered_map<int,RListNode*> map_Location;
+    RListNode *listHead;
+    RListNode *listTail;
+    int nTotalLen = 0;
+    int nNowLen = 0;
+public:
+    LRUCache(int capacity) {
+        nTotalLen = capacity;
+        listHead = new RListNode(-1);
+        listTail = new RListNode(-1);
+        listHead->next = listTail;
+        listTail->pre = listHead;
+    }
+    
+    int get(int key) {
+        auto isExist = map_Location.find(key);
+         if(isExist == map_Location.end())
+         {
+             return -1;
+         }
+        RListNode *pTemp = isExist->second;
+        pTemp->pre->next = pTemp->next;
+        pTemp->next->pre = pTemp->pre;
+        pTemp->next = listHead->next;
+        listHead->next->pre = pTemp;
+        listHead->next = pTemp;
+        pTemp->pre = listHead;
+        return pTemp->val;
+        
+    }
+    
+    void put(int key, int value) {
+        auto isExist = map_Location.find(key);
+        //the value is not found
+        if(isExist == map_Location.end())
+        {
+            if (nNowLen < nTotalLen)
+            {
+                quickInsert(key,value);
+
+            }
+            else
+            {
+                fullInsert(key,value);
+            }
+            return;
+        }
+
+        //the value presented, renew it's position
+        RListNode *pTemp = isExist->second;
+        pTemp->pre->next = pTemp->next;
+        pTemp->next->pre = pTemp->pre;
+        pTemp->next = listHead->next;
+        listHead->next->pre = pTemp;
+        listHead->next = pTemp;
+        pTemp->pre = listHead;
+        pTemp->val = value;
+        return;
+        
+    }
+
+    void quickInsert(int key,int value)
+    {
+        nNowLen++;
+        RListNode* pNewNode = new RListNode(value);
+        pNewNode->key = key;
+        map_Location[key] = pNewNode;
+        pNewNode->next = listHead->next;
+        listHead->next->pre = pNewNode;
+        pNewNode->pre = listHead;
+        listHead->next = pNewNode;
+
+    }
+
+    void fullInsert(int key,int value)
+    {
+        //Delete the oldest element in the linklist
+        RListNode*  pDel = listTail->pre;
+        listTail->pre = listTail->pre->pre;
+        listTail->pre->next = listTail;
+        map_Location.erase(pDel->key);
+        delete pDel;
+        quickInsert(key,value);
+
+    }
+};
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
