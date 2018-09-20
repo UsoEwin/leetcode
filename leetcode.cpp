@@ -967,6 +967,8 @@ class LRUCache
 //notice how to use unordered map here 
 
 //88. Merge Sorted Array
+//pay attention to the start point
+//should be end of the array
 static const int _ = []() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
