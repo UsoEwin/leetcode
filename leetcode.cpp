@@ -870,122 +870,98 @@ static const auto io_sync_off = [] () {
 
 
 //dont use consecutive data structure like 
-//辅助一个map，实现key的快速查找
-#include<iostream>
-#include<unordered_map>
-using namespace std;
-
-struct RListNode {
+struct DListNode {
    int key;
    int val;
-   RListNode *next;
-   RListNode *pre;
-   RListNode(int x) : val(x), next(NULL),pre(NULL) {}
+   DListNode *next;
+   DListNode *prev;
+   DListNode(int x) : val(x), next(NULL),prev(NULL) {}
 };
-
 
 static const auto io_sync_off = [] () {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     return nullptr;
 }();
-
-
-
-
-//dont use consecutive data structure like 
-//辅助一个map，实现key的快速查找
-class LRUCache {
-private:
-    unordered_map<int,RListNode*> map_Location;
-    RListNode *listHead;
-    RListNode *listTail;
-    int nTotalLen = 0;
-    int nNowLen = 0;
-public:
-    LRUCache(int capacity) {
-        nTotalLen = capacity;
-        listHead = new RListNode(-1);
-        listTail = new RListNode(-1);
-        listHead->next = listTail;
-        listTail->pre = listHead;
+//actual LRU Cache
+class LRUCache
+{
+    private:
+        unordered_map<int,DListNode*> map_idx;
+        DListNode *head;
+        DListNode *tail;
+        int        capacity = 0;
+        int        elementCount = 0;
+    public:
+    LRUCache(int cap)
+    {
+        capacity = cap;
+        head = new DListNode(-1);
+        tail = new DListNode(-1);
+        head->next = tail;
+        tail->prev = head; 
     }
-    
-    int get(int key) {
-        auto isExist = map_Location.find(key);
-         if(isExist == map_Location.end())
-         {
-             return -1;
-         }
-        RListNode *pTemp = isExist->second;
-        pTemp->pre->next = pTemp->next;
-        pTemp->next->pre = pTemp->pre;
-        pTemp->next = listHead->next;
-        listHead->next->pre = pTemp;
-        listHead->next = pTemp;
-        pTemp->pre = listHead;
-        return pTemp->val;
-        
+    int get(int key)
+    {
+        auto isExist = map_idx.find(key);
+        if(isExist == map_idx.end())
+            return -1; // can not find
+        DListNode *temp = isExist->second;
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->next = head->next;
+        head->next->prev = temp;
+        head->next = temp;
+        temp->prev = head;
+        return temp->val;
     }
-    
-    void put(int key, int value) {
-        auto isExist = map_Location.find(key);
-        //the value is not found
-        if(isExist == map_Location.end())
+    void put(int key, int value)
+    {
+        auto isExist = map_idx.find(key);
+        if(isExist == map_idx.end())
         {
-            if (nNowLen < nTotalLen)
-            {
+            if(elementCount < capacity)
                 quickInsert(key,value);
-
-            }
             else
-            {
                 fullInsert(key,value);
-            }
             return;
         }
-
-        //the value presented, renew it's position
-        RListNode *pTemp = isExist->second;
-        pTemp->pre->next = pTemp->next;
-        pTemp->next->pre = pTemp->pre;
-        pTemp->next = listHead->next;
-        listHead->next->pre = pTemp;
-        listHead->next = pTemp;
-        pTemp->pre = listHead;
-        pTemp->val = value;
+        //since the value presented, renew it's position
+        DListNode *temp = isExist->second;
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        temp->next = head->next;
+        head->next->prev = temp;
+        head->next = temp;
+        temp->prev = head;
+        temp->val = value;//need renew the value
         return;
-        
     }
-
-    void quickInsert(int key,int value)
+    
+    void quickInsert(int key, int value)
     {
-        nNowLen++;
-        RListNode* pNewNode = new RListNode(value);
+        elementCount+=1;
+        DListNode *pNewNode = new DListNode(value);
         pNewNode->key = key;
-        map_Location[key] = pNewNode;
-        pNewNode->next = listHead->next;
-        listHead->next->pre = pNewNode;
-        pNewNode->pre = listHead;
-        listHead->next = pNewNode;
-
+        map_idx[key] = pNewNode;
+        pNewNode->next = head->next;
+        head->next->prev = pNewNode;
+        pNewNode->prev = head;
+        head->next = pNewNode;
+        return;
     }
-
-    void fullInsert(int key,int value)
+    
+    void fullInsert(int key, int value)
     {
-        //Delete the oldest element in the linklist
-        RListNode*  pDel = listTail->pre;
-        listTail->pre = listTail->pre->pre;
-        listTail->pre->next = listTail;
-        map_Location.erase(pDel->key);
+        //need to remove the last
+        DListNode *pDel = tail->prev;
+        tail->prev = tail->prev->prev;
+        tail->prev->next = tail;
+        map_idx.erase(pDel->key);
         delete pDel;
         quickInsert(key,value);
-
+        return;
     }
 };
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache obj = new LRUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */
+//should inplement the LRU cache using stl list later
+//notice how to use unordered map here
