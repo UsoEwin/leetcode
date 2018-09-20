@@ -964,4 +964,50 @@ class LRUCache
     }
 };
 //should inplement the LRU cache using stl list later
-//notice how to use unordered map here
+//notice how to use unordered map here 
+
+//88. Merge Sorted Array
+static const int _ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
+class Solution 
+{
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
+    {
+        int pN1 = m-1,pN2 = n-1, pW = m+n-1;
+
+        while(pN1 >= 0 && pN2 >= 0)
+        {
+        	if(nums1[pN1] >nums2[pN2])
+        	{
+        		nums1[pW] = nums1[pN1];
+        		pN1--,pW--;
+        	}
+        	else
+        	{
+        		nums1[pW] = nums2[pN2];
+        		pN2--,pW--;
+        	}
+        }
+        if(pN1 >= 0)
+        {
+        	while(pN1 >= 0)
+        	{
+        		nums1[pW] = nums1[pN1];
+        		pN1--,pW--;
+        	}
+        }
+        else
+        {
+        	while(pN2 >= 0)
+        	{
+        		nums1[pW] = nums2[pN2];
+        		pN2--,pW--;
+        	}
+        }
+        return;
+    }
+};
