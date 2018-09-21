@@ -1023,7 +1023,6 @@ public:
             return count;
         else if(nums.size() == 1)
             return 1;
-        //two pointer
         int write = 1,read = 1;
         count++;
         while(read < nums.size())
