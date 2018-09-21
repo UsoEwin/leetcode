@@ -1013,3 +1013,34 @@ public:
         return;
     }
 };
+//26. Remove Duplicates from Sorted Array
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) 
+    {
+        int count = 0;
+        if(nums.size() == 0)
+            return count;
+        else if(nums.size() == 1)
+            return 1;
+        //two pointer
+        int write = 1,read = 1;
+        count++;
+        while(read < nums.size())
+        {
+            if(nums[read] == nums[read-1])
+            {
+                read++;
+                continue;
+            }
+            else
+            {
+            	nums[write] = nums[read++];
+            	write++;
+            	count++;
+            }
+        }
+        return count;
+    }
+};
+//9. Palindrome Number
