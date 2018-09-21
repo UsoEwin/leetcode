@@ -1044,3 +1044,23 @@ public:
     }
 };
 //9. Palindrome Number
+static const int _ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x < 0) return false;
+        long long ret = 0;
+        int y = x;
+        while(y > 0)
+        {
+            ret = ret*10 + (y%10);
+            y = y/10;
+        }
+        if(ret == x) return true;
+        return false;
+    }
+};
