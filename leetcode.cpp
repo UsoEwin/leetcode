@@ -1059,8 +1059,40 @@ public:
         {
             ret = ret*10 + (y%10);
             y = y/10;
-        }
+   vb     }
         if(ret == x) return true;
         return false;
+    }
+};
+//335. Self Crossing
+class Solution
+{
+public:
+    bool isSelfCrossing(vector<int>& x)
+    {
+        x.insert(x.begin(), 4, 0);
+
+        int len = x.size();
+        int i = 4;
+
+        // outer spiral
+        for (; i < len && x[i] > x[i - 2]; i++);
+        // in this case
+        // all outer spiral
+        if (i == len) return false;
+
+        // check border
+    	//if there is crossing,
+    	//make x[i-1] negative
+    	//this can also be a special case
+        if (x[i] >= x[i - 2] - x[i - 4])
+        {
+            x[i - 1] -= x[i - 3];
+        }
+
+        // inner spiral
+        for (i++; i < len && x[i] < x[i - 2]; i++);
+
+        return i != len;
     }
 };
