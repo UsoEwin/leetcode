@@ -1057,6 +1057,13 @@ public:
         return false;
     }
 };
+
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+
 //335. Self Crossing
 class Solution
 {
