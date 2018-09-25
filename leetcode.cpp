@@ -1097,7 +1097,8 @@ public:
     }
 };
 //709. To Lower Case
-class Solution {
+class Solution 
+{
 public:
     string toLowerCase(string str) {
         int diff = 'a' - 'A';
