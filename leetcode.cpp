@@ -1111,3 +1111,34 @@ public:
         return str;
     }
 };
+//905. Sort Array By Parity
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& A) {
+        int l = 0, r = A.size() - 1, temp = 0;
+        while(l < r)
+        {
+            if(A[l]%2 != 0 && A[r]%2 == 0)
+            {
+                //swap
+                temp = A[l];
+                A[l] = A[r];
+                A[r] = temp;
+                l++,r--;
+            }
+            else if(A[l]%2 == 0 && A[r]%2 == 0)
+            {
+                l++;
+            }
+            else if(A[l]%2 != 0 && A[r]%2 !=0 )
+            {
+                r--;
+            }
+            else 
+            {
+                l++,r--;
+            }
+        }
+        return A;
+    }
+};
