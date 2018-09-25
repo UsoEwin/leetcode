@@ -1096,3 +1096,16 @@ public:
         return i != len;
     }
 };
+//709. To Lower Case
+class Solution {
+public:
+    string toLowerCase(string str) {
+        int diff = 'a' - 'A';
+        for(int i = 0; i < str.length(); ++i)
+        {
+            if(str[i]>= 'A' && str[i]<='Z')
+                str[i] += diff;
+        }
+        return str;
+    }
+};
