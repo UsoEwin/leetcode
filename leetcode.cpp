@@ -1100,7 +1100,8 @@ public:
 class Solution 
 {
 public:
-    string toLowerCase(string str) {
+    string toLowerCase(string str) 
+    {
         int diff = 'a' - 'A';
         for(int i = 0; i < str.length(); ++i)
         {
