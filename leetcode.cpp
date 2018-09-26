@@ -1165,3 +1165,26 @@ public:
         return A;
     }
 };
+//867. Transpose Matrix
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& A) {
+        vector<vector<int> > ret;
+       
+        for(int i = 0; i < A[0].size(); ++i)
+        {   
+             vector<int> temp;
+            for(int j = 0; j< A.size(); ++j)
+            {
+                temp.push_back(A[j][i]);
+            }
+            ret.push_back(temp);
+        }
+        return ret;
+    }
+};
