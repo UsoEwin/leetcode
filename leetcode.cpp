@@ -1212,3 +1212,22 @@ public:
         return res;
     }
 };
+//852. Peak Index in a Mountain Array
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& A) {
+        int low = 0, high = A.size();
+        int id = low + (high - low)/2;
+        while(low < high)
+        {
+            if(A[id-1] <= A[id] && A[id] <= A[id + 1])
+                low = id + 1;
+            else if(A[id-1] >= A[id] && A[id] >= A[id+1])
+                high = id;
+            else
+                return id;
+            id = low + (high - low)/2;
+        }
+        return A[id];
+    }
+};
