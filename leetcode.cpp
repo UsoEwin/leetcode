@@ -1236,3 +1236,21 @@ public:
         return A[id];
     }
 };
+//700. Search in a Binary Search Tree
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if(root == NULL) return NULL;
+        if(root->val == val)
+            return root;
+        else if(val > root->val)
+            return searchBST(root->right,val);
+        else
+            return searchBST(root->left,val);
+    }
+};
