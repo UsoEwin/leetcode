@@ -1314,3 +1314,35 @@ public:
         return addDigits(ret);
     }
 };
+//243. Shortest Word Distance
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    int shortestDistance(vector<string>& words, string word1, string word2) {
+        
+        int min = 0xFFFF, temp = 0xFFFF, wd1idx = 0xFFFF, wd2idx = 0xFFFF;
+        for(int i = 0; i < words.size(); ++i)
+        {
+            //search for word1 and 2
+            if(words[i] == word1)
+            {
+                wd1idx = i;
+            }
+            else if(words[i] == word2)
+            {
+                wd2idx = i;
+            }
+            
+            if(wd1idx != 0xFFFF && wd2idx!= 0xFFFF)
+            {
+                min = abs(wd1idx-wd2idx) < min? abs(wd1idx-wd2idx):min;
+            }
+        }
+        return min;
+        
+    }
+};
