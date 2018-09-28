@@ -1346,3 +1346,20 @@ public:
         
     }
 };
+//136. Single Number
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int res=0;
+        for(auto i=nums.begin(); i!=nums.end(); i++){
+        	//this is because the associtivity of ^ operator
+            res^=*i;
+        }
+        return res;
+    }
+};
