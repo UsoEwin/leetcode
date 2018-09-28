@@ -1294,3 +1294,23 @@ public:
         return true;
     }
 };
+//258. Add Digits
+static const auto io_sync_off = [] () {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    int addDigits(int num) {
+        if(num < 10) return num;
+        int ret = 0, temp = 0;
+        while(num >= 10)
+        {
+            ret += num%10;
+            num /=10;
+        }
+        ret += num;
+        return addDigits(ret);
+    }
+};
