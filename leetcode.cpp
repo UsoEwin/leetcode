@@ -1417,6 +1417,11 @@ public:
     }
 };
 //342. Power of Four
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
 class Solution {
 public:
     bool isPowerOfFour(int num) {
