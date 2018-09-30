@@ -1430,3 +1430,18 @@ public:
         return (((num&(num-1)) == 0) && ((num-1)%3 == 0));
     }
 };
+//326. Power of Three
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        if(n <= 0) return false;
+        long double log3 = log(n)/log(3);
+        return ((ceil(log3) - log3 <= 1e-10)?true:false);
+        
+    }
+};
