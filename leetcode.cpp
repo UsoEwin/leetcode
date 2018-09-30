@@ -1376,3 +1376,43 @@ public:
         return !(n&(n-1));
     }
 };
+//458. Poor Pigs
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
+class Solution {
+public:
+    int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+        
+        return ceil(log2(buckets)/log2(minutesToTest/minutesToDie + 1));
+    }
+};
+//167. Two Sum II - Input array is sorted
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int l = 0, r = numbers.size()-1,sum = 0;
+        vector<int> ret;
+        while(l < r)
+        {
+            sum = numbers[l] + numbers[r];
+            if(sum == target)
+            {
+                ret.push_back(l+1);
+                ret.push_back(r+1);
+                return ret;
+            }
+            else if(sum < target)
+            {
+                l++;
+            }
+            else if(sum > target)
+            {
+                r--;
+            }
+        }
+        return ret;
+    }
+};
