@@ -1465,3 +1465,25 @@ public:
         return true;
     }
 };
+//766. Toeplitz Matrix
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
+class Solution {
+public:
+    bool isToeplitzMatrix(vector<vector<int>>& matrix) {
+        int i = 0, j = 0;
+        //check i
+        for( ; i < matrix.size() - 1; ++i)
+        {
+            for( j = 0 ; j < matrix[i].size() - 1; ++j)
+            {
+                if(matrix[i][j] != matrix[i+1][j+1])
+                    return false;
+            }
+        }
+        return true;
+    }
+};
