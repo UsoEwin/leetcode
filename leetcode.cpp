@@ -1445,3 +1445,23 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    bool validWordSquare(vector<string>& words) {
+        int i = 0, j = 0;
+        for( ; i < words.size(); ++i)
+        {   
+            j = 0;
+            for( ; j < words[i].size(); ++j)
+            {   
+                if( j < words.size() && i < words[j].size())
+                {if(words[i][j] != words[j][i])
+                        return false;}
+                else 
+                    return false;
+            }
+        }
+        return true;
+    }
+};
