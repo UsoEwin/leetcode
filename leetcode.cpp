@@ -1548,3 +1548,55 @@ public:
         return 1;
     }
 };
+//345. Reverse Vowels of a String
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    string reverseVowels(string s) {
+        unordered_map<char,int> vowels = {
+            {'a',1},
+            {'e',2},
+            {'i',3},
+            {'o',4},
+            {'u',5},
+            {'A',6},
+            {'E',7},
+            {'I',8},
+            {'O',9},
+            {'U',10}
+        };
+        int l = 0, r = s.length()-1;
+        while(l < r)
+        {
+            auto itL = vowels.find(s[l]);
+            auto itR = vowels.find(s[r]);
+            char temp;
+            if(itL != vowels.end() && itR != vowels.end())
+            {
+                temp = s[r];
+                s[r] = s[l];
+                s[l] = temp;
+                r--,l++;
+            }
+            else if(itL != vowels.end() && itR == vowels.end())
+            {
+                r--;
+            }
+            else if(itL == vowels.end() && itR != vowels.end())
+            {
+                l++;
+            }
+            else
+            {
+                r--,l++;
+            }
+        }
+        return s;
+        }
+    
+};
+//
