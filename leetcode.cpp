@@ -1501,3 +1501,23 @@ public:
         return (num % 2 == 0) ? isUgly(num/2) : (num % 3 == 0)? isUgly(num/3) : (num % 5 == 0) ? isUgly(num/5) : false;
     }
 };
+//246. Strobogrammatic Number
+class Solution {
+public:
+    bool isStrobogrammatic(string num) {
+        unordered_map<char,char> numPair = {
+            {'1','1'},{'6','9'},{'8','8'},{'9','6'},{'0','0'}
+        };
+        string rotate;
+        for(int i = 0; i < num.length(); ++i)
+        {
+            auto it = numPair.find(num[i]);
+            if(it == numPair.end())
+                return false;
+            rotate = it->second + rotate;
+        }
+        if(rotate == num)
+            return true;
+        return false;
+    }
+};
