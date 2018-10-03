@@ -1599,4 +1599,57 @@ public:
         }
     
 };
-//
+//537. Complex Number Multiplication
+class Solution {
+public:
+    string complexNumberMultiply(string a, string b) {
+        int real = 0, image = 0, realA = 0, realB = 0, imageA = 0, imageB = 0;
+        //read the real part
+        int i = 0;
+        int j = 0;
+        if(a[0] == '-') i++;
+        if(b[0] == '-') j++;
+        while(a[i] != '+')
+        {
+            realA = realA * 10 + a[i] - '0';
+            i++;
+        }
+        
+        while(b[j] != '+')
+        {
+            realB = realB * 10 + b[j] - '0';
+            j++;
+        }
+        //read the image part
+        int negativeA = 0, negativeB = 0;
+        i++,j++;
+        if(a[i] == '-')
+        {
+            negativeA = 1,i++;
+        }
+        if(b[j] == '-')
+        {
+            negativeB = 1,j++;
+        }
+        while(a[i] != 'i')
+        {
+            imageA = imageA*10 + a[i] - '0';
+            i++;
+        }
+        while(b[j] != 'i')
+        {
+            imageB = imageB*10 + b[j] - '0';
+            j++;
+        }
+        if(negativeA == 1)
+            imageA = -imageA;
+        if(negativeB == 1)
+            imageB = -imageB;
+        if(a[0] == '-') realA = -realA;
+        if(b[0] == '-') realB = -realB;
+        real = realA * realB - imageA * imageB;
+        image = realA * imageB + imageA * realB;
+        
+        return (to_string(real) + '+' + to_string(image) + 'i');
+    }
+};
