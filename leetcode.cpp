@@ -1521,3 +1521,30 @@ public:
         return false;
     }
 };
+//125. Valid Palindrome
+class Solution {
+public:
+    bool isValid(char c){
+        if((c-'0'>=0 && c-'9'<=0)) return 1;
+        if((c-'a'>=0 && c-'z'<=0)) return 1;
+        if((c-'A'>=0 && c-'Z'<=0)) return 1;
+        return 0;
+    }
+    
+    bool comp(char c, char d){
+        if((c-'A'>=0 && c-'Z'<=0)) c = c-'A'+'a';
+        if((d-'A'>=0 && d-'Z'<=0)) d = d-'A'+'a';
+        if(c==d) return 1;
+        else return 0;
+    }
+    bool isPalindrome(string s) {
+        int i=0, n = s.size(), j = n-1;
+        while(i<j){
+            while(i<n && !isValid(s[i])) i++;
+            while(j>=0 && !isValid(s[j])) j--;
+            if(!comp(s[i],s[j])) return 0;
+            i++; j--;
+        }
+        return 1;
+    }
+};
