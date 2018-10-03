@@ -1487,3 +1487,17 @@ public:
         return true;
     }
 };
+//263. Ugly Number
+static const auto speedupio=[] { 
+    ios::sync_with_stdio(false); 
+    cin.tie(nullptr); 
+    return nullptr; 
+}();
+class Solution {
+public:
+    bool isUgly(int num) {
+        if(num == 0) return false;
+        else if(num == 1) return true;
+        return (num % 2 == 0) ? isUgly(num/2) : (num % 3 == 0)? isUgly(num/3) : (num % 5 == 0) ? isUgly(num/5) : false;
+    }
+};
