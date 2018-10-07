@@ -1762,3 +1762,32 @@ public:
         ret.push_back(root->val);
     }
 };
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+//876. Middle of the Linked List
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        int count = 1;
+        ListNode *fast = head, *slow = head;
+        if(!head) return NULL;
+        while(fast->next)
+        {
+            slow = slow->next;
+            if(fast->next != NULL)
+            {
+                fast = fast->next;
+                count++;
+            }
+            if(fast->next != NULL)
+            {
+                fast = fast->next;
+                count++;
+            }
+        }
+        return slow;
+    }
+};
