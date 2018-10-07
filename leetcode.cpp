@@ -1687,3 +1687,28 @@ private:
         
     }
 };
+//
+class Solution {
+public:
+    string countAndSay(int n) {
+        if(n == 1) return "1";
+        string prev = countAndSay(n-1), ret = "";
+        int lastIdx = 0,count = 0;
+        for(int i = 0; i < prev.length(); ++i)
+        {
+            if(prev[i] != prev[lastIdx] )
+            {
+                string temp = to_string(count);
+                ret = ret + temp + prev[lastIdx];
+                lastIdx = i;
+                count = 1;
+            }
+            else
+                count++;
+        }
+        string temp = to_string(count);
+        ret = ret + temp + prev[lastIdx];
+        
+        return ret;
+    }
+};
