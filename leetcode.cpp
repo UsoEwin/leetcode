@@ -1653,3 +1653,18 @@ public:
         return (to_string(real) + '+' + to_string(image) + 'i');
     }
 };
+//404. Sum of Left Leaves
+class Solution {
+public:
+    int sumOfLeftLeaves(TreeNode* root) {
+        int sum = 0;
+        if(!root) return sum;
+        if(root->left) 
+        sum += sumOfLeftLeaves(root->left);
+        if(root->right)
+        sum += sumOfLeftLeaves(root->right);
+        if((root->left) && !(root->left->left) && !(root->left->right))
+            sum += root->left->val;
+        return sum;
+    }
+};
