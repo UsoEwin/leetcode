@@ -1791,3 +1791,35 @@ public:
         return slow;
     }
 };
+//917. Reverse Only Letters
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    string reverseOnlyLetters(string S) {
+        int head = 0, tail = S.length()-1;
+        while(head < tail)
+        {
+            while(!isalpha(S[head]))
+            {
+                head++;
+            }
+            while(!isalpha(S[tail]))
+            {
+                tail--;
+            }
+            if(head < tail)
+            {
+                if(head >= tail) break;
+                char temp = S[head];
+                S[head] = S[tail];
+                S[tail] = temp;
+                head++,tail--;
+            }
+        }
+        return S;
+    }
+};
