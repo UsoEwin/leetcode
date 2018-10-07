@@ -1739,3 +1739,26 @@ public:
         return root;
     }
 };
+//590. N-ary Tree Postorder Traversal
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    vector<int> postorder(Node* root) {
+        vector<int> ret;
+        helper(root,ret);
+        return ret;
+    }
+    void helper(Node* root, vector<int>& ret)
+    {
+        if(root == NULL) return;
+        for(int i = 0; i < root->children.size(); ++i)
+        {
+            helper(root->children[i],ret);
+        }
+        ret.push_back(root->val);
+    }
+};
