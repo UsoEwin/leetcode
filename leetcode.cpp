@@ -1687,7 +1687,7 @@ private:
         
     }
 };
-//
+//38. Count And Say
 class Solution {
 public:
     string countAndSay(int n) {
@@ -1710,5 +1710,32 @@ public:
         ret = ret + temp + prev[lastIdx];
         
         return ret;
+    }
+};
+//814. Binary Tree Pruning
+class Solution {
+public:
+    TreeNode* pruneTree(TreeNode* root) {
+        if(root == NULL) return NULL;
+        if(root->val == 0 && root->left == NULL && root->right == NULL)
+        {  
+            root->val = 2;//remove it
+            return root;
+        }
+        else if(root->val == 1 && root->left == NULL && root->right == NULL)
+        {
+            return root;
+        }
+        
+        TreeNode* l =  pruneTree(root->left);
+        TreeNode* r =  pruneTree(root->right);
+        
+        if(l && l->val == 2) root->left = NULL;
+        if(r && r->val == 2) root->right = NULL;
+        if(root->val == 0 && root->left == NULL && root->right == NULL)
+        {
+            root->val = 2;
+        }
+        return root;
     }
 };
