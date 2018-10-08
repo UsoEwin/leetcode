@@ -1823,3 +1823,30 @@ public:
         return S;
     }
 };
+//589. N-ary Tree Preorder Traversal
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    vector<int> preorder(Node* root) 
+    {
+        vector<int> ret;
+        if(!root) return ret;
+        helper(root,ret);
+        return ret;
+    }
+private:
+    void helper(Node *root, vector<int>& ret)
+    {
+        if(!root) return;
+        ret.push_back(root->val);
+        for(int i = 0; i < root->children.size(); ++i)
+        {
+            helper(root->children[i],ret);
+        }
+        return;
+    }
+};
