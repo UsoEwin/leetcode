@@ -1891,3 +1891,20 @@ public:
         node->next = node->next->next;
     }
 };
+//145. Binary Tree Postorder Traversal
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> ret;
+        helper(root,ret);
+        return ret;
+    }
+    void helper(TreeNode *root, vector<int>& ret)
+    {
+        if(!root) return;
+        helper(root->left,ret);
+        helper(root->right,ret);
+        ret.push_back(root->val);
+        return;
+    }
+};
