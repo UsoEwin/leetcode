@@ -1868,3 +1868,18 @@ public:
         return ret;
     }
 };
+//442. Find All Duplicates in an Array
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> ret;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            int correctIdx = abs(nums[i]) - 1;
+            if(nums[correctIdx] < 0)
+                ret.push_back(abs((nums[i])));
+            nums[correctIdx] =  nums[correctIdx] > 0 ? -nums[correctIdx]:nums[correctIdx];
+        }
+        return ret;
+    }
+};
