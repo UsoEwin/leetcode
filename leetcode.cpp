@@ -1908,3 +1908,15 @@ public:
         return;
     }
 };
+//100. Same Tree
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if((p && !q) || (!p && q))
+            return false;
+        else if(!p && !q)
+            return true;
+        return (isSameTree(p->left,q->left) && isSameTree(p->right,q->right) && (p->val == q->val));
+        
+    }
+};
