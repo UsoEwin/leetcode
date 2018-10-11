@@ -1933,3 +1933,29 @@ public:
         return root;
     }
 };
+//540. Single Element in a Sorted Array
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int l=0,h=nums.size()-1;
+        while(l<h){
+            int idx = l + (h - l)/2;//updating condition
+            if(nums[idx] == nums[idx - 1])
+            {
+                if((h - idx - 1) % 2 == 0)
+                    l = idx + 1;
+                else
+                    h = idx - 2;
+            }
+            else if(nums[idx] == nums[idx + 1])
+            {
+                if((h - idx - 1) % 2 == 0)
+                    h = idx - 1;
+                else
+                    l = idx + 2;
+            }
+            else return nums[idx];
+        }
+        return nums[l];
+    }
+};
