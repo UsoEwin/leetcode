@@ -1959,3 +1959,20 @@ public:
         return nums[l];
     }
 };
+//98. Validate Binary Search Tree
+class Solution 
+{
+public:
+    bool isValidBST(TreeNode* root) 
+    {
+        return isValidBST(root,NULL,NULL);
+    }
+    bool isValidBST(TreeNode *root, TreeNode *min, TreeNode *max)
+    {
+        if(!root) return true;
+        if((min && root->val <= min->val) || (max && root->val >= max->val))
+            return false;
+        else
+            return isValidBST(root->left,min,root) && isValidBST(root->right,root,max);
+    }
+};
