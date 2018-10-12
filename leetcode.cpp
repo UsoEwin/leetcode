@@ -2038,3 +2038,35 @@ public:
         return;
     }
 };
+//369. Plus One Linked List
+class Solution {
+public:
+    ListNode* plusOne(ListNode* head) {
+        if(!head) return NULL;
+        ListNode* ptr = head;
+        int carry = addOne(ptr);
+        if(carry)
+        {
+            ptr = new ListNode(1);
+            ptr->next = head;
+            head = ptr;
+        }
+        return head;
+    }
+    int addOne(ListNode* head)
+    {   
+        int carry = 0;
+        if(!head)
+        {
+            return 1;
+        }
+        carry = addOne(head->next);
+        head->val += carry;
+        if(head->val >= 10)
+        {carry = 1,head->val = 0;}
+        else
+            carry = 0;
+        return carry;
+        
+    }
+};
