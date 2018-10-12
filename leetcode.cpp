@@ -1976,3 +1976,31 @@ public:
             return isValidBST(root->left,min,root) && isValidBST(root->right,root,max);
     }
 };
+//83. Remove Duplicates from Sorted List
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode *slow = head, *fast = head;
+        if(!head) return NULL;
+        if(!(head->next)) return head;
+        fast = head->next;
+        
+        while(fast)
+        {   
+
+            if(fast->val == slow->val)
+            {
+                slow->next = fast->next;
+                fast = fast->next;
+            }
+            else
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+            
+        }
+        return head;
+        
+    }
+};
