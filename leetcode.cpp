@@ -2116,3 +2116,31 @@ public:
         return true;
     }
 };
+//821. Shortest Distance to a Character
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    vector<int> shortestToChar(string S, char C) {
+        vector<int> res;
+        int lastT = 20000;
+        for(int i = 0; i < S.length(); ++i)
+        {
+            if(S[i] == C)
+                lastT = i;
+            res.push_back(abs(i-lastT));
+        }
+        lastT = 20000;
+        for(int i = S.length() - 1; i >= 0; --i)
+        {
+            if(S[i] == C)
+                lastT = i;
+            res[i] = res[i] > abs((lastT-i)) ?  abs((lastT-i)) : res[i];
+        }
+        
+        return res;
+    }
+};
