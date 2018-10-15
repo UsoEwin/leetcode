@@ -2204,3 +2204,21 @@ public:
         return sum;
     }
 };
+//266. Palindrome Permutation
+class Solution {
+public:
+    bool canPermutePalindrome(string s) {
+        unordered_map<char,int> thisMap;
+        for(auto& it:s)
+        {
+            thisMap[it]++;
+        }
+        int odd = 0;
+        for(auto it:thisMap)
+        {
+            if(it.second % 2 == 1)
+                odd++;
+        }
+        return odd <= 1;
+    }
+};
