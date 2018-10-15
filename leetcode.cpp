@@ -2144,3 +2144,63 @@ public:
         return res;
     }
 };
+//682. Baseball Game
+static int var = [](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    int calPoints(vector<string>& ops) {
+        stack<int> stk;
+        int sum = 0;
+        for(int i = 0; i < ops.size(); ++i)
+        {
+
+            if(ops[i] == "C")
+            {
+                if(stk.empty())
+                    continue;
+                sum -= stk.top();
+                stk.pop();
+            }
+            else if(ops[i] == "D")
+            {
+                sum += (stk.top()*2);
+                stk.push(stk.top()*2);
+            }
+            else if(ops[i] == "+")
+            {
+                if(stk.empty())
+                {
+                    continue;
+                }
+                else
+                {
+                    int num1 = stk.top();
+                    stk.pop();
+                    if(stk.empty())
+                    {
+                        sum += num1;
+                        stk.push(num1);
+                    }
+                    else 
+                    {
+                        int num2 = stk.top();
+                        sum += num1+num2;
+                        stk.push(num1);
+                        stk.push(num1+num2);
+                    }
+                }
+                
+            }
+            else
+            {
+                sum += stoi(ops[i]);
+                stk.push(stoi(ops[i]));
+            }
+        }
+        return sum;
+    }
+};
