@@ -2222,3 +2222,31 @@ public:
         return odd <= 1;
     }
 };
+//496. Next Greater Element I
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
+        stack<int> stk;
+        unordered_map<int,int> seq;
+        vector<int> res;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            while(!stk.empty() && stk.top() < nums[i])
+            {
+                seq[stk.top()] = nums[i];
+                stk.pop();
+            }
+            stk.push(nums[i]);
+        }
+        while(!stk.empty())
+        {
+            seq[stk.top()] = -1;
+            stk.pop();
+        }
+        for(int i = 0; i < findNums.size(); ++i)
+        {
+            res.push_back(seq[findNums[i]]);
+        }
+        return res;
+    }
+};
