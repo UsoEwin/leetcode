@@ -2316,3 +2316,30 @@ public:
         return -1;
     }
 };
+//346. Moving Average from Data Stream
+class MovingAverage {
+public:
+    /** Initialize your data structure here. */
+    MovingAverage(int size) {
+        sizeMax = size;
+        sum = 0;
+    }
+    
+    double next(int val) {
+        double res = 0;
+        que.push(val);
+        if(que.size() > sizeMax)
+        {
+            sum -= que.front();
+            que.pop();
+        }
+        
+        sum += val;
+        res = sum/que.size();
+        return res;
+    }
+private:
+    long double sum;
+    int sizeMax;
+    queue<int> que;
+};
