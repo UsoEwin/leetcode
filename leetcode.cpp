@@ -2259,16 +2259,37 @@ public:
         for(int i = 0; i < s.length()-1; ++i)
         {
             if(s[i] == s[i+1])
-                {
-                    if(s[i] == '+')
-                        {
+            {
+                if(s[i] == '+')
+                    {
                             string temp = s;
                             temp[i] = temp[i+1] = '-';
                             res.push_back(temp);
-                        }
-
-                }
+                    }
+            }
         }
         return res;
+    }
+};
+//921. Minimum Add to Make Parentheses Valid
+class Solution {
+public:
+    int minAddToMakeValid(string S) {
+        int invalid = 0, left = 0;
+        
+        for(int i = 0; i < S.length(); ++i)
+        {
+            if(S[i] == '(')
+                left++;
+            else if(S[i] == ')')
+            {
+                if(left > 0)
+                    left--;
+                else
+                    invalid++;
+            }
+        }
+        invalid += left;
+        return invalid;
     }
 };
