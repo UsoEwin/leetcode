@@ -2293,3 +2293,26 @@ public:
         return invalid;
     }
 };
+//704. Binary Search
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0, h = nums.size()-1;
+        int m = l + (h-l)/2;
+        do
+        {
+            m = l + (h-l)/2;
+            if(nums[m] == target)
+                return m;
+            else if(nums[m] > target)
+            {
+                h = m - 1;
+            }
+            else
+            {
+                l = m + 1;
+            }
+        }while(l <= h);
+        return -1;
+    }
+};
