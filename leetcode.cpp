@@ -2433,3 +2433,18 @@ private:
         return abs(A[0]-B[0]) + abs(A[1]-B[1]);
     }
 };
+//624. Maximum Distance in Arrays
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& arrays) {
+        int maxVal = arrays[0][arrays[0].size()-1], minVal = arrays[0][0];
+        int res = 0;
+        for(int i = 1; i < arrays.size(); ++i)
+        {
+            res = max(res,max(abs(maxVal-arrays[i][0]),abs(arrays[i][arrays[i].size()-1] - minVal)));
+            maxVal = max(maxVal,arrays[i][arrays[i].size()-1]);
+            minVal = min(minVal,arrays[i][0]);
+        }
+        return res;
+    }
+};
