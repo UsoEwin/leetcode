@@ -2412,3 +2412,24 @@ public:
         return curMax;
     }
 };
+//573. Squirrel Simulation
+class Solution {
+public:
+    int minDistance(int height, int width, vector<int>& tree, vector<int>& squirrel, vector<vector<int>>& nuts) {
+        int res = 0;
+        int fm = -50000;
+        //need to min tot - 2*dis(tree,nut[i]) + dis(tree,nut[i]) + dis(nut[i],sq)
+        //-> tot - (dis(tree,nut[i]) - dis(nut[i],sq))
+        for(int i = 0; i < nuts.size(); ++i)
+        {
+            res += 2*distance(tree,nuts[i]);
+            fm = max(fm, distance(nuts[i],tree) - distance(nuts[i],squirrel));
+        }
+        return res-fm;
+    }
+private:
+    int distance(vector<int> A, vector<int> B)
+    {
+        return abs(A[0]-B[0]) + abs(A[1]-B[1]);
+    }
+};
