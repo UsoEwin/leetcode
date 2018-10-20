@@ -2377,3 +2377,24 @@ public:
         return min(f1,f2);
     }
 };
+//367. Valid Perfect Square
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        //notice 0 is the corner case
+        if(num == 1 || num == 0) return true;
+        int r = num/2, l = 0;
+        long target = l + (r-l)/2;
+        while(l <= r)
+        {
+            target = l + (r-l)/2;
+            if(target*target == num)
+                return true;
+            else if(target*target < num)
+                l = target + 1;
+            else
+                r = target - 1;
+        }
+        return false;
+    }
+};
