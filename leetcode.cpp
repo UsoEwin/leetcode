@@ -2398,3 +2398,17 @@ public:
         return false;
     }
 };
+//198. House Robber
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int curMax = 0, prevMax = 0;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            int temp = curMax;
+            curMax = max(prevMax + nums[i], curMax);
+            prevMax = temp;
+        }
+        return curMax;
+    }
+};
