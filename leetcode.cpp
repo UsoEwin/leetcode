@@ -2461,3 +2461,53 @@ public:
         return sum;
     }
 };
+//415. Add String
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        int carry = 0, l1 = num1.length()-1, l2 = num2.length()-1;
+        string res;
+        while(l1 >= 0 || l2 >= 0)
+        {
+            if(l1 >= 0 && l2 >= 0)
+            {
+                int d1 = num1[l1] - '0';
+                int d2 = num2[l2] - '0';
+                int temp = ((d1 + d2 + carry)%10 + '0');
+                res = char(temp) + res;
+                if(d1 + d2 + carry >= 10)
+                {
+                    carry = 1;
+                }
+                else
+                    carry = 0;
+                l1--,l2--;
+            }
+            else if(l1 >= 0)
+            {
+                int d1 = num1[l1] - '0';
+                int temp = ((d1 + carry)%10 + '0');
+                res = char(temp) + res;
+                if(d1 + carry >= 10)
+                    carry = 1;
+                else
+                    carry = 0;
+                l1--;
+            }
+            else
+            {
+                int d2 = num2[l2] - '0';
+                int temp = ((d2 + carry)%10 + '0');
+                res = char(temp) + res;
+                if(d2 + carry >= 10)
+                    carry = 1;
+                else
+                    carry = 0;
+                l2--;
+            }   
+        }
+        if(carry > 0)
+            res = '1' + res;
+        return res;
+    }
+};
