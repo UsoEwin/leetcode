@@ -2559,3 +2559,35 @@ public:
         return sum - nums.size() * minN;
     }
 };
+//8. String to Integer (atoi)
+class Solution {
+public:
+    int myAtoi(string str) {
+        int res = 0, sign = 1, i = 0;
+        //skip all blanks
+        while(str[i] == ' ' && i < str.size())
+            i++;
+        if(i == str.size())
+            return 0;
+        //check the sign
+        if(str[i] == '+')
+        {
+            ++i;
+        }
+        else if(str[i] == '-')
+        {
+            ++i, sign = -1;
+        }
+        //convert number
+        for( ; i < str.size(); ++i)
+        {
+            if(str[i] < '0' || str[i] > '9')
+                return res*sign;
+            int readin = str[i] - '0';
+            if((INT_MAX - readin)/10 < res)
+                return sign == 1? INT_MAX:INT_MIN;
+            res = res*10 + readin;
+        }
+        return res*sign;
+    }
+};
