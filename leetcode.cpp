@@ -2511,3 +2511,19 @@ public:
         return res;
     }
 };
+//338. Counting Bits
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        //transfer function
+        //dp(x+b) = dp(x) + 1, b = 2^m > x
+        //map from [b,2b) to [2b,4b)
+        //or using n&(n-1) have 1 less 1 bit than n
+        vector<int> res(num+1,0);
+        for(int i = 1; i <= num; ++i)
+        {
+            res[i] = res[i&(i-1)] + 1;
+        }
+        return res;
+    }
+};
