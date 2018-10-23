@@ -2544,3 +2544,18 @@ public:
         return (p == -1 || p == 0 || (p == nums.size()-2) || (nums[p-1] <= nums[p+1]) || (nums[p] <= nums[p+2]));
     }
 };
+//453. Minimum Moves to Equal Array Elements
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        //adding one to n-1 nums means
+        //decrease the highest num by 1
+        int sum = 0, minN = INT_MAX;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            sum += nums[i];
+            minN = minN > nums[i] ? nums[i] : minN;
+        }
+        return sum - nums.size() * minN;
+    }
+};
