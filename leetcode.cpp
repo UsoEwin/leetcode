@@ -2566,3 +2566,16 @@ public:
         return res*sign;
     }
 };
+//908. Smallest Range I
+class Solution {
+public:
+    int smallestRangeI(vector<int>& A, int K) {
+        int maxVal = A[0], minVal = A[0];
+        for(int i = 0; i < A.size(); ++i)
+        {
+            minVal = min(minVal, A[i]),
+            maxVal = max(maxVal, A[i]);
+        }
+        return max(0,maxVal-minVal-2*K);
+    }
+};
