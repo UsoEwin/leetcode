@@ -2579,3 +2579,24 @@ public:
         return max(0,maxVal-minVal-2*K);
     }
 };
+//883. Projection Area of 3D Shapes
+class Solution {
+public:
+    int projectionArea(vector<vector<int>>& grid) {
+        int res = 0, maxR = 0, maxC = 0;
+        //need search through all grid
+        for(int i = 0; i < grid.size(); ++i)
+        {   
+            maxR = 0, maxC = 0;
+            for(int j = 0; j < grid[i].size(); ++j)
+            {
+                if(grid[i][j] > 0)
+                    res++;
+                maxR = max(grid[i][j],maxR);
+                maxC = max(grid[j][i],maxC);
+            }
+            res = res + maxR + maxC;
+        }
+        return res;
+    }
+};
