@@ -2650,3 +2650,15 @@ public:
         return true;
     }
 };
+//575. Distribute Candies
+class Solution {
+public:
+    int distributeCandies(vector<int>& candies) {
+        unordered_map<int,int> myMap;
+        for(int i = 0; i < candies.size(); ++i)
+        {
+            myMap[candies[i]]++;
+        }
+        return min(candies.size()/2,myMap.size());
+    }
+};
