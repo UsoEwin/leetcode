@@ -2634,3 +2634,19 @@ public:
         return false;
     }
 };
+//693. Binary Number with Alternating Bits
+class Solution {
+public:
+    bool hasAlternatingBits(int n) {
+        //compare the last bit
+        int lastB = n % 2, nextB = n >> 1;
+        while(nextB > 0)
+        {
+            if(nextB % 2 == lastB)
+                return false;
+            lastB = nextB % 2;
+            nextB = nextB >> 1;
+        }
+        return true;
+    }
+};
