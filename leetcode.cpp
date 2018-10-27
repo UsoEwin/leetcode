@@ -2662,3 +2662,16 @@ public:
         return min(candies.size()/2,myMap.size());
     }
 };
+//283. Move Zeros
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int last0 = 0, curr = 0;
+        for( ; curr < nums.size(); ++curr)
+        {
+            if(nums[curr] != 0)
+                swap(nums[curr],nums[last0++]);
+        }
+        return;
+    }
+};
