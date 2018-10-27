@@ -2675,3 +2675,22 @@ public:
         return;
     }
 };
+//922. Sort Array By Parity
+class Solution {
+public:
+    vector<int> sortArrayByParityII(vector<int>& A) {
+        int odd = 1, even = 0;
+        while(odd < A.size() && even < A.size())
+        {
+        	if(A[odd] % 2 != 1 && A[even] % 2 != 0)
+        		swap(A[odd],A[even]);
+        	else if(A[odd] % 2 == 1 && A[even] % 2 != 0)
+        		odd += 2;
+        	else if(A[odd] % 2 != 1 && A[even] % 2 == 0)
+        		even += 2;
+        	else
+        		even += 2, odd += 2;
+        }
+        return A;
+    }
+};
