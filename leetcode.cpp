@@ -2715,3 +2715,19 @@ public:
         return inc||dec;
     }
 };
+//104. Maximum Depth of Binary Tree
+class Solution {
+public:
+    int maxDepth(TreeNode* root) 
+    {
+        if(!root) return 0;
+        return max(helper(1,root->left),helper(1,root->right));
+    }
+private:
+    int helper(int depth, TreeNode* root)
+    {
+        if(!root)
+            return depth;
+        return max(helper(depth+1,root->left),helper(depth+1,root->right));
+    }
+};
