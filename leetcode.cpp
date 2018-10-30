@@ -2752,3 +2752,14 @@ public:
     }
 };
 //717. 1-bit and 2-bit Characters
+class Solution {
+public:
+    bool isOneBitCharacter(vector<int>& bits) {
+        int readPtr = 0;
+        while(readPtr < bits.size()-1)
+        {
+            readPtr += bits[readPtr] + 1;
+        }
+        return readPtr == bits.size()-1;
+    }
+};
