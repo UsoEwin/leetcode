@@ -2731,3 +2731,24 @@ private:
         return max(helper(depth+1,root->left),helper(depth+1,root->right));
     }
 };
+//551. Student Attendance Record I
+class Solution {
+public:
+    bool checkRecord(string s) {
+        int absent = 0;
+        if(s.size() <= 1) return true;
+        for(int i = 1; i < s.size() - 1; ++i)
+        {
+            if(s[i] == 'A')
+                absent++;
+            if(s[i-1] == 'L' && s[i] == 'L' && s[i+1] == 'L')
+                return false;
+        }
+        if(s[0] == 'A')
+            absent++;
+        if(s[s.size()-1] == 'A')
+            absent++;
+        return absent <= 1;
+    }
+};
+//717. 1-bit and 2-bit Characters
