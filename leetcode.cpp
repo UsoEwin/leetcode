@@ -2763,3 +2763,21 @@ public:
         return readPtr == bits.size()-1;
     }
 };
+//101. Symmetric Tree
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) 
+    {
+        return helper(root,root);
+    }
+private:
+    bool helper(TreeNode* r1, TreeNode* r2)
+    {
+        if(!r1 && !r2)
+            return true;
+        else if(!r1 || !r2)
+            return false;
+        else
+            return (r1->val == r2->val) && helper(r1->right,r2->left) && helper(r1->left,r2->right);
+    }
+};
