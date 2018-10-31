@@ -2781,3 +2781,33 @@ private:
             return (r1->val == r2->val) && helper(r1->right,r2->left) && helper(r1->left,r2->right);
     }
 };
+//812. Largest Triangle Area
+class Solution {
+public:
+    double largestTriangleArea(vector<vector<int>>& points) {
+        double dist = 0;
+        double halfD = 0;
+        for(int i = 0; i < points.size(); ++i)
+        {
+            for(int j = i + 1; j < points.size(); ++j)
+            {
+                for(int k = j + 1; k < points.size(); ++k)
+                {
+                    halfD = distance(points[i],points[j]) + distance(points[j],points[k]) +                                     distance(points[i],points[k]);
+                    halfD = halfD / 2;
+                    double temp = sqrt(halfD *(halfD - distance(points[i],points[j]))*
+                                      (halfD - distance(points[j],points[k]))*
+                                      (halfD - distance(points[k],points[i]))
+                                      );
+                    dist = max(dist,temp);
+                }
+            }
+        }
+        return dist;
+    }
+private:
+    double distance(vector<int> a, vector<int> b)
+    {
+        return sqrt((a[0]-b[0])*(a[0]-b[0]) + (a[1]-b[1])*(a[1]-b[1]));
+    }
+};
