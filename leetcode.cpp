@@ -2856,3 +2856,15 @@ public:
         return a;
     }
 };
+//470. Implement Rand10() Using Rand7()
+class Solution {
+public:
+    int rand10() {
+        //6 + 7 * 6 
+        int res = 40;
+        while (res >= 40){
+            res = 7 * (rand7()-1)+rand7()-1;
+        }
+        return res % 10 + 1;
+    }
+};
