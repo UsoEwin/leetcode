@@ -2811,3 +2811,32 @@ private:
         return sqrt((a[0]-b[0])*(a[0]-b[0]) + (a[1]-b[1])*(a[1]-b[1]));
     }
 };
+//892. Surface Area of 3D Shapes
+class Solution {
+public:
+    int surfaceArea(vector<vector<int>>& grid) {
+        int res = 0;
+        vector<int> dr = {0, 1, 0, -1};
+        vector<int> dc = {1, 0, -1, 0};
+        for(int i = 0; i < grid.size(); ++i)
+        {
+            for(int j = 0; j < grid[i].size(); ++j)
+            {
+                if(grid[i][j] > 0){
+                    res += 2;
+                    for(int k = 0; k < 4; ++k)
+                    {
+                        //compute row and col
+                        int nr = dr[k] + i;
+                        int nc = dc[k] + j;
+                        int nv = 0;
+                        if(nr >= 0 && nr < grid.size() && nc >= 0 && nc < grid[i].size())
+                            nv = grid[nr][nc];
+                        res += max(grid[i][j]-nv,0);
+                    }
+                }
+            }
+        }
+        return res;
+    }
+};
