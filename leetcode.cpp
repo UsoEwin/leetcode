@@ -2868,3 +2868,26 @@ public:
         return res % 10 + 1;
     }
 };
+//477. Total Hamming Distance
+class Solution {
+public:
+    int totalHammingDistance(vector<int>& nums) {
+        vector<int> tab(32,0);
+        int res = 0;
+        for(auto num: nums)
+        {
+            int i = 0;
+            while(num > 0)
+            {
+                tab[i] += num&1;
+                num >>= 1;
+                i++;
+            }
+        }
+        for(int i = 0; i < 32; ++i)
+        {
+            res += tab[i]*(nums.size() - tab[i]);
+        }
+        return res;
+    }
+};
