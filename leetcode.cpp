@@ -2891,3 +2891,18 @@ public:
         return res;
     }
 };
+//633. Sum of Square Numbers
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        //for this question, the int is not enough
+        //which means int is actually flipped
+        for(long long a = 0; a*a <= c; a++)
+        {
+            double b = sqrt(c - a*a);
+            if(b - int(b) <= 1e-9)
+                return true;
+        }
+        return false;
+    }
+};
