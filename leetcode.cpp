@@ -2962,3 +2962,25 @@ private:
         return;
     }
 };
+//349. Intersection of Two Arrays
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int> myMap;
+        for(int i = 0; i < nums2.size(); ++i)
+        {
+            if(myMap[nums2[i]] == 0)
+                myMap[nums2[i]]++;
+        }
+        vector<int> res;
+        for(int i = 0; i < nums1.size(); ++i)
+        {
+            if(myMap[nums1[i]] == 1)
+            {
+                myMap[nums1[i]]++;
+                res.push_back(nums1[i]);
+            }
+        }
+        return res;
+    }
+};
