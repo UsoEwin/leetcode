@@ -2906,3 +2906,22 @@ public:
         return false;
     }
 };
+//653. Two Sum IV - Input is a BST
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        unordered_set<int> numMap;
+        return helper(root,numMap,k);
+    }
+private:
+    bool helper(TreeNode* root, unordered_set<int>& numMap, int k)
+    {
+        if(!root) return false;
+        auto it = numMap.find(k-root->val);
+        if(it != numMap.end())
+            return true;
+        else
+            numMap.insert(root->val);
+        return (helper(root->left,numMap,k)||helper(root->right,numMap,k));
+    }
+};
