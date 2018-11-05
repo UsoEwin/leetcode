@@ -2925,3 +2925,40 @@ private:
         return (helper(root->left,numMap,k)||helper(root->right,numMap,k));
     }
 };
+//257. Binary Tree Paths
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) 
+    {
+        vector<int> path;
+        vector<string> res;
+        helper(root,path,res);
+        return res;
+    }
+private:
+    void helper(TreeNode* root, vector<int>& path, vector<string>& res)
+    {
+        if(!root) return;
+        
+        if(!(root->left) && !(root->right))
+        {
+            path.push_back(root->val);
+            string temp;
+            for(int i = 0; i < path.size(); ++i)
+            {
+                if(i == path.size()-1)
+                    temp += to_string(path[i]);
+                else
+                    temp += to_string(path[i]) + "->";
+            }
+            res.push_back(temp);
+            path.pop_back();
+            return;
+        }
+        path.push_back(root->val);
+        helper(root->left,path,res);
+        helper(root->right,path,res);
+        path.pop_back();
+        return;
+    }
+};
