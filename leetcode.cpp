@@ -2984,3 +2984,25 @@ public:
         return res;
     }
 };
+//504. Base 7
+class Solution {
+public:
+    string convertToBase7(int num) {
+        string res;
+        bool neg = false;
+        if(num == 0)
+            return "0";
+        if(num < 0)
+            neg = true;
+        num = abs(num);
+        while(num > 0)
+        {
+            int digit = num % 7;
+            res = to_string(digit) + res;
+            num /= 7;
+        }
+        if(neg == true)
+            res = "-" + res;
+        return res;
+    }
+};
