@@ -3067,3 +3067,15 @@ public:
         return res;
     }
 };
+//492. Construct the Rectangle
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        int l = sqrt(area);
+        while(area % l != 0)
+        {
+            l--;
+        }
+        return vector<int>({area/l,l});
+    }
+};
