@@ -3044,8 +3044,26 @@ public:
             }
             res.push_back(temp);
         }
+        return res;           
+    }
+};
+//409. Longest Palindrome
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        unordered_map<char,int> myMap;
+        int res = 0, single = 0;
+        for(int i = 0; i < s.size(); ++i)
+        {
+            myMap[s[i]]++;
+        }
+        for(auto it = myMap.begin(); it != myMap.end(); ++it)
+        {
+
+            res += (it->second % 2 == 1) ? it->second - 1: it->second;
+            if(res % 2 == 0 && it->second % 2 == 1)
+                res++;
+        }
         return res;
-    
-            
     }
 };
