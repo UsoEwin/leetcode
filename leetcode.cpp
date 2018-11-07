@@ -3079,3 +3079,28 @@ public:
         return vector<int>({area/l,l});
     }
 };
+//661. Image Smoother
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& M) {
+        vector<vector<int>> res(M.size(),vector<int>(M[0].size()));
+        for(int i = 0; i < M.size(); ++i)
+        {
+            for(int j = 0; j < M[0].size(); ++j)
+            {
+                int ni = i-1, nj = j-1;
+                int cnt = 0, sum = 0;
+                for( ; ni <= i+1; ni++)
+                {
+                    for(nj = j-1; nj <= j+1; nj++)
+                    {
+                        if(ni >= 0 && ni < M.size() && nj >= 0 && nj < M[i].size())
+                            cnt++, sum += M[ni][nj];
+                    }
+                }
+                res[i][j] = sum/cnt;
+            }
+        }
+        return res;
+    }
+};
