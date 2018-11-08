@@ -3104,3 +3104,21 @@ public:
         return res;
     }
 };
+//563. Binary Tree Tilt
+class Solution {
+public:
+    int findTilt(TreeNode* root) {
+        if(!root) return 0;
+        int thisTilt = abs(findSum(root->left) - findSum(root->right));
+        int leftTilt = findTilt(root->left);
+        int rightTilt = findTilt(root->right);
+        return thisTilt + leftTilt + rightTilt;
+    }
+private:
+    int findSum(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return findSum(root->left) + findSum(root->right) + root->val;
+    }
+};
