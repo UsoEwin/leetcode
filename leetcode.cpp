@@ -579,8 +579,6 @@ public:
 }
 //149. Max Points on a Line
 //my code, using linear algebra O(n^2)
-
-//a god like code, 0ms, random number
 class Solution {
 public:
     int maxPoints(vector<Point>& points) {
