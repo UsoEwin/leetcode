@@ -3141,3 +3141,23 @@ public:
         return dummy->next;
     }
 };
+//565. Array Nesting
+class Solution {
+public:
+    int arrayNesting(vector<int>& nums) {
+        int maxCnt = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            int temp = i, cnt = 0; 
+            while(nums[temp] != 20001)
+            {
+                int val = nums[temp];
+                nums[temp] = 20001;
+                temp = val;
+                cnt++;
+            }
+            maxCnt = max(maxCnt,cnt);
+        }
+        return maxCnt;
+    }
+};
