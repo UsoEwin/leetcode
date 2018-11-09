@@ -3159,3 +3159,19 @@ public:
         return maxCnt;
     }
 };
+//754. Reach a Number
+class Solution {
+public:
+    int reachNumber(int target) {
+        int step = 0, sum = 0;
+        target = abs(target);
+        while(sum < target)
+        {
+            sum += step;
+            step++;
+        }
+        //if step is odd, add step make it even(namely next to step - 1)
+        //if step is even, add two more to make it even
+        return (target - sum) % 2 == 0 ? step - 1 : step + (step-1) %2;
+    }
+};
