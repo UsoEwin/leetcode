@@ -3199,3 +3199,23 @@ public:
         return res;
     }
 };
+//203. Remove Linked List Elements
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode *dummy = new ListNode(0);
+        dummy->next = head;
+        if(!head) return NULL;
+        ListNode *prev = dummy,*curr = head;
+        while(curr->next)
+        {
+            if(curr->val == val)
+                prev->next = curr->next,curr = curr->next;
+            else
+                prev = curr, curr = curr->next;
+        }
+        if(curr->val == val)
+            prev->next = NULL;
+        return dummy->next;
+    }
+};
