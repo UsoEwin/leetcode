@@ -3219,3 +3219,22 @@ public:
         return dummy->next;
     }
 };
+//374. Guess Number Higher or Lower
+class Solution {
+public:
+    int guessNumber(int n) {
+        int left = 1, right = n;
+        int idx = 0;
+        while(left <= right)
+        {
+            idx = left + (right-left)/2;
+            if(guess(idx) == 0)
+                return idx;
+            else if(guess(idx) == -1)
+                right = idx - 1;
+            else
+                left = idx + 1;
+        }
+        return -1;
+    }
+};
