@@ -3270,3 +3270,22 @@ public:
         return cnt >= n;
     }
 };
+//58. Length of Last Word
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int cnt = 0, flag = 1;
+        for(int i = s.size()-1; i >= 0; --i)
+        {
+            if(s[i] == ' ' && flag == 1)
+                continue;
+            else if(s[i] != ' ' && flag == 1)
+                flag = 0, cnt++;
+            else if(s[i] != ' ' && flag == 0)
+                cnt++;
+            else if(s[i] == ' ' && flag == 0)
+                break;
+        }
+        return cnt;
+    }
+};
