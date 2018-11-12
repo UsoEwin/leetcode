@@ -3238,3 +3238,18 @@ public:
         return -1;
     }
 };
+//434. Number of Segments in a String
+class Solution {
+public:
+    int countSegments(string s) {
+        int cnt = 0,isWord = 0;
+        for(int i = 0; i < s.size(); ++i)
+        {
+            if(isWord == 0 && s[i] != ' ')
+                cnt++, isWord = 1;
+            else if(isWord == 1 && s[i] == ' ')
+                isWord = 0;
+        }
+        return cnt;
+    }
+};
