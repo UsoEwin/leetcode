@@ -3317,3 +3317,19 @@ public:
         return max3 == LLONG_MIN ? max1 : max3;
     }
 };
+//509. Fibonacci Number
+class Solution {
+public:
+    int fib(int N) {
+        if(N == 0) return 0;
+        else if(N == 1) return 1;
+        long long fib1 = 0, fib2 = 1;
+        for(int i = 1; i < N; i++)
+        {
+            long long temp = fib1 + fib2;
+            fib1 = fib2;
+            fib2 = temp;
+        }
+        return fib2;
+    }
+};
