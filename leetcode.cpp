@@ -3375,3 +3375,17 @@ private:
             return half * half * x;
     }
 };
+//961. N-Repeated Element in Size 2N Array
+class Solution {
+public:
+    int repeatedNTimes(vector<int>& A) {
+        unordered_map<int,int> myMap;
+        long long num = A.size()/2;
+        for(int i = 0; i < A.size(); ++i) {
+            myMap[A[i]]++;
+            if(myMap[A[i]] >= num)
+                return A[i];
+        }
+        return 0;
+    }
+};
