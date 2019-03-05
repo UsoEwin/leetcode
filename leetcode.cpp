@@ -3389,3 +3389,16 @@ public:
         return 0;
     }
 };
+//53. Maximum Subarray
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        long long best = INT_MIN, sum = INT_MIN;
+        for(int i = 0;i < nums.size(); ++i)
+        {
+            sum = max((long long) nums[i],nums[i] + sum);
+            best = max(sum,best);
+        }
+        return best;
+    }
+};
