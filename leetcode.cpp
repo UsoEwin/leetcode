@@ -3442,3 +3442,27 @@ private:
         return;
     }
 };
+//977. Squares of a Sorted Array
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& A) {
+        int left = 0, right = A.size()-1, count = A.size()-1;
+        vector<int> res(A.size());
+        while(count >= 0)
+        {
+            if(abs(A[left]) < abs(A[right]))
+            {
+                res[count] = A[right]*A[right];
+                right--;
+                count--;
+            }
+            else
+            {
+                res[count] = A[left]*A[left];
+                left++;
+                count--;
+            }
+        }
+        return res;
+    }
+};
