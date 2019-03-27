@@ -3415,3 +3415,30 @@ public:
         return best;
     }
 };
+
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) 
+    {
+        vector<vector<int>> res;
+        vector<int> temp;
+        search(nums,0,res, temp);
+        return res;
+    }
+private:
+    void search(vector<int> nums, int idx, vector<vector<int > > & res, vector<int>& temp)
+    {
+        if(idx >= nums.size())
+        {
+            res.push_back(temp);
+        }
+        else
+        {
+            search(nums,idx+1,res,temp);
+            temp.push_back(nums[idx]);
+            search(nums,idx+1,res,temp);
+            temp.pop_back();
+        }
+        return;
+    }
+};
