@@ -3494,3 +3494,26 @@ private:
         return;
     }
 };
+//942. DI String Match
+class Solution {
+public:
+    vector<int> diStringMatch(string S) {
+        int lo = 0, hi = S.size();
+        vector<int> res = vector<int>(S.size()+1);
+        for(int i = 0; i < S.size(); ++i)
+        {
+            if(S[i] == 'D')
+            {
+                res[i] = hi;
+                hi--;
+            }
+            else
+            {
+                res[i] = lo;
+                lo++;
+            }
+        }
+        res[S.size()] = lo;
+        return res;
+    }
+};
