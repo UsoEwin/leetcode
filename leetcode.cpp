@@ -3466,3 +3466,31 @@ public:
         return res;
     }
 };
+//90. Subsets II
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) 
+    {
+        //since we won't search the case 
+        //phi
+        vector<vector<int>> res={{}};
+        vector<int> temp;
+        sort(nums.begin(), nums.end());
+        search(nums,0,res, temp);
+        return res;
+    }
+private:
+    void search(vector<int> nums, int idx, vector<vector<int > > & res, vector<int>& temp)
+    {
+        for(int k = idx; k < nums.size(); k++)
+        {
+            //remove duplicates
+            if(k > idx && nums[k] == nums[k-1]) continue;
+            temp.push_back(nums[k]);
+            res.push_back(temp);
+            search(nums,k+1,res, temp);
+            temp.pop_back();
+        }
+        return;
+    }
+};
