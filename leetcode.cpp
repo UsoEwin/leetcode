@@ -3517,3 +3517,33 @@ public:
         return res;
     }
 };
+//46. Permutations
+class Solution 
+{
+    public:
+        vector<vector<int>> permute(vector<int>& nums) 
+        {
+            vector<vector<int>> res;
+            search(0, res, nums);
+            return res;
+        }
+    private:
+        void search(int level, vector<vector<int>> &res, vector<int> nums)
+        {
+            if (level == nums.size() - 1)
+            {
+                res.push_back(nums);
+                return;
+            }
+            else
+            {
+                for (int i = level; i < nums.size(); ++i)
+                {
+                    swap(nums[level], nums[i]);
+                    search(level + 1, res, nums);
+                    swap(nums[level], nums[i]);
+                }
+            }
+            return;
+        }
+};
