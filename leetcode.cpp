@@ -3547,3 +3547,35 @@ class Solution
             return;
         }
 };
+//47. Permutations II
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums)
+
+    {
+        vector<vector<int>> res;
+        sort(nums.begin(), nums.end());
+        search(0, res, nums);
+        return res;
+    }
+private:
+    void search(int level, vector<vector<int>> &res, vector<int> nums)
+    {
+        if (level == nums.size() - 1)
+        {
+            res.push_back(nums);
+            return;
+        }
+        else
+        {
+            for (int i = level; i < nums.size(); ++i)
+            {
+                if (i > level && nums[level] == nums[i]) continue;
+                //swap everyone after [level] to the [level] position so that generate permutations.
+                swap(nums[level], nums[i]);
+                search(level + 1, res, nums);
+            }
+        }
+        return;
+    }
+}
