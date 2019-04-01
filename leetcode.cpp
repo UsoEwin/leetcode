@@ -3590,3 +3590,34 @@ public:
         return letters[0];
     }
 };
+//888. Fair Candy Swap
+class Solution {
+public:
+    vector<int> fairCandySwap(vector<int>& A, vector<int>& B) {
+        
+        long long sumA = 0, sumB = 0;
+        
+        vector<int> res;
+        
+        for(auto x:A) sumA += x;
+        
+        for(auto x:B) sumB += x;
+        
+        long long diff = (sumB-sumA)/2;
+        
+        unordered_set<int> setB;
+        
+        for(auto x:B) setB.insert(x);
+        
+        for(auto x:A)
+        {
+            if(setB.find(x+diff) != setB.end())
+            {
+                res.push_back(x);
+                res.push_back(x+diff);
+                break;
+            }
+        }
+        return res;
+    }
+};
