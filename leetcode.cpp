@@ -3621,3 +3621,37 @@ public:
         return res;
     }
 };
+//31. Next Permutation
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) 
+    {
+        //find the 1st violation that nums[i] > nums[i+1]
+        int i = nums.size()-2;
+        while(i >= 0 && nums[i] >= nums[i+1])
+            i--;
+        if(i >= 0)
+        {
+            //find the first element greater than nums[i]
+            int j = nums.size()-1;
+            while(j >= 0 && nums[j] <= nums[i])
+                j--;
+            //swap it
+            swap(nums[i],nums[j]);
+        }
+        //sort or reverse the remaining part
+        reverse(nums, i+1);
+        return;
+    }
+private:
+    void reverse(vector<int>& nums, int start)
+    {
+        //reverse the input after the swap
+        int i = start, j = nums.size()-1;
+        while(i < j)
+        {
+            swap(nums[i],nums[j]);
+            i++,j--;
+        }
+    }
+};
