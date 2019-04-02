@@ -3675,3 +3675,16 @@ public:
         return 0;
     }
 };
+//810. Chalkboard XOR Game
+class Solution {
+public:
+    bool xorGame(vector<int>& nums) {
+        int res = 0;
+        //just need to prove
+        for(auto x : nums)
+        {
+            res ^= x;
+        }
+        return res == 0 || nums.size()%2 == 0;
+    }
+};
