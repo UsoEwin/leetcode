@@ -3655,3 +3655,23 @@ private:
         }
     }
 };
+//441. Arranging Coins
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        long long lo = 0, hi = n;
+        long long idx = n/2;
+        while(lo <= hi)
+        {
+            idx = lo + (hi-lo)/2;
+            long long target = idx*(idx+1)/2, nextTarget = (idx+1)*(idx+2)/2;
+            if(target <= n && nextTarget > n)
+                return idx;
+            else if(target < n)
+                lo = idx+1;
+            else
+                hi = idx-1;
+        }
+        return 0;
+    }
+};
