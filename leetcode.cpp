@@ -3688,3 +3688,25 @@ public:
         return res == 0 || nums.size()%2 == 0;
     }
 };
+//202. Happy Number
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_map<int,int> myMap;
+        myMap[n]++;
+        while(n != 1)
+        {
+            long long sum = 0;
+            while(n != 0)
+            {
+                sum += (n%10)*(n%10);
+                n /= 10;
+            }
+            if(myMap[sum] != 0 && sum != 1)
+                return false;
+            myMap[sum]++;
+            n = sum;
+        }
+        return true;
+    }
+};
