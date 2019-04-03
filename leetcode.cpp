@@ -3710,3 +3710,34 @@ public:
         return true;
     }
 };
+//890. Find and Replace Pattern
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        vector<string> res;
+        for(auto x : words)
+        {            
+            if(checkPattern(x,pattern))
+                res.push_back(x);
+        }
+        return res;
+    }
+private:
+    bool checkPattern(string target, string pattern)
+    {
+        unordered_map<char,char> map1;
+        unordered_map<char,char> map2;
+        if(target.size()!=pattern.size())
+            return false;
+        for(int i = 0; i < target.size(); ++i)
+        {
+            if(map1.find(target[i]) == map1.end())
+                map1[target[i]] = pattern[i];
+            if(map2.find(pattern[i]) == map2.end())
+                map2[pattern[i]] = target[i];
+            if(map1[target[i]] != pattern[i] || map2[pattern[i]] != target[i])
+                return false;
+        }
+        return true;
+    }
+};
