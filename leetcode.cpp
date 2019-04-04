@@ -3766,3 +3766,30 @@ public:
         return cnt;
     }
 };
+//941. Valid Mountain Array
+class Solution {
+public:
+    bool validMountainArray(vector<int>& A) {
+        if(A.size() < 3) return false;
+        int peak = -1;
+        for(int i = 0; i < A.size()-1; ++i)
+        {
+            //find the peak
+            if(A[i] == A[i+1])
+            {
+                return false;
+            }
+            else if(peak == -1 && A[i] > A[i+1])
+            {
+                peak = i;
+            }
+            else if(peak != -1 && A[i] < A[i+1])
+            {
+                return false;
+            }
+        }
+        if(peak == 0 || peak == -1)
+            return false;
+        return true;
+    }
+};
