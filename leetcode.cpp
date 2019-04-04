@@ -3741,3 +3741,26 @@ private:
         return true;
     }
 };
+//204. Count Primes
+class Solution {
+public:
+    int countPrimes(int n) {
+        vector<bool> table = vector<bool>(n+1,true);
+        long long cnt = n - 2;
+        if(n <= 1) return 0;
+        for(long long i = 2; i*i < n; ++i)
+        {
+            if(table[i] == false)
+                continue;
+            for(long long j = i; j * i < n; ++j)
+            {
+				if (table[j*i] == true)
+				{
+					cnt--;
+					table[j*i] = false;
+				}
+            }
+        }
+        return cnt;
+    }
+};
