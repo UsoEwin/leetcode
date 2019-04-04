@@ -3745,6 +3745,8 @@ private:
 class Solution {
 public:
     int countPrimes(int n) {
+    	//a better solution is not creating the table but 
+    	//keep generating prime and save them
         vector<bool> table = vector<bool>(n+1,true);
         long long cnt = n - 2;
         if(n <= 1) return 0;
