@@ -3813,3 +3813,22 @@ public:
 		return  sum - num == num;
 	}
 };
+//868. Binary Gap
+class Solution {
+public:
+    int binaryGap(int N) {
+        if(N&(N-1) == 0)
+            return 0;
+        int last = -1, ans = 0;
+        for(int i = 0; i < 32; ++i)
+        {
+            if( (N >> i) & 1 == 1)
+            {
+                if(last >= 0)
+                    ans = max(i-last,ans);
+                last = i;
+            }
+        }
+        return ans;
+    }
+};
