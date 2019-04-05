@@ -3793,3 +3793,23 @@ public:
         return true;
     }
 };
+//507. Perfect Number
+class Solution {
+public:
+	bool checkPerfectNumber(int num) {
+		if (num <= 0)
+			return false;
+		long long sum = 0;
+		for (int i = 1;i * i <= num; ++i)
+		{
+			if (num % i == 0)
+			{
+				sum += i;
+				if (i * i != num)
+					sum += num / i;
+			}
+		}
+		//we have added every one twice, so half it;
+		return  sum - num == num;
+	}
+};
