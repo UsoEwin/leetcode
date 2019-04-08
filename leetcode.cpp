@@ -3832,3 +3832,27 @@ public:
         return ans;
     }
 };
+//985. Sum of Even Numbers After Queries
+class Solution {
+public:
+    vector<int> sumEvenAfterQueries(vector<int>& A, vector<vector<int>>& queries) {
+        int sum = 0;
+        vector<int> res(queries.size());
+        for(auto x : A)
+        {
+            if(x % 2 == 0)
+                sum += x;
+        }
+        for(int i = 0; i < queries.size(); ++i)
+        {
+            int idx = queries[i][1], val = queries[i][0];
+            if(A[idx] % 2 == 0)
+                sum -= A[idx];
+            A[idx] += val;
+            if(A[idx] % 2 == 0)
+                sum += A[idx];
+            res[i] = sum;
+        }
+        return res;
+    }
+};
