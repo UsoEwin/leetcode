@@ -3856,3 +3856,23 @@ public:
         return res;
     }
 };
+//503. Next Greater Element II
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) 
+    {
+        stack<int> stk;
+        vector<int> res(nums.size());
+        for(int i = 2*nums.size() - 1; i >= 0; --i)
+        {
+            
+            while(!stk.empty() && nums[stk.top()] <= nums[i%nums.size()])
+            {
+                stk.pop();
+            }
+            res[i % nums.size()] = stk.empty() ? -1 : nums[stk.top()];
+            stk.push(i%nums.size());
+        }
+        return res;
+    }
+};
