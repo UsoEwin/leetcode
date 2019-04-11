@@ -3942,3 +3942,29 @@ public:
 		return s;
 	}
 };
+//290. Word Pattern
+class Solution {
+public:
+	bool wordPattern(string pattern, string str) {
+		unordered_map<char, string> my_map1;
+		unordered_map<string, char> my_map2;
+		vector<string> vec;
+		std::stringstream ss(str);
+		char delim = ' ';
+		std::string token;
+		while (std::getline(ss, token, delim))
+			vec.push_back(token);
+		if (vec.size() != pattern.size())
+			return false;
+		for (int i = 0; i < pattern.size(); ++i)
+		{
+			if (my_map1.find(pattern[i]) == my_map1.end())
+				my_map1[pattern[i]] = vec[i];
+			if (my_map2[vec[i]] == 0)
+				my_map2[vec[i]] = pattern[i];
+			if (my_map1[pattern[i]] != vec[i] || my_map2[vec[i]] != pattern[i])
+				return false;
+		}
+		return true;
+	}
+};
