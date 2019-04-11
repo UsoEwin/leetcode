@@ -3926,3 +3926,19 @@ public:
 		return sum;
 	}
 };
+//168. Excel Sheet Column Title
+class Solution {
+public:
+	string convertToTitle(int n) {
+		string s;
+		while (n > 26)
+		{
+			char c = (n - 1) % 26 + 'A';
+			s = c + s;
+			n = (n-1) / 26;
+		}
+		char c = (n - 1) % 26 + 'A';
+		s = c + s;
+		return s;
+	}
+};
