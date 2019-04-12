@@ -4018,7 +4018,6 @@ private:
 				paragraph[i] = tolower(paragraph[i]);
 			if (!isalpha(paragraph[i]) && flag == 0)
 			{
-				//cout << paragraph.substr(start, i - start) << endl;
 				vec.push_back(paragraph.substr(start, i - start));
 				flag = 1;
 			}
