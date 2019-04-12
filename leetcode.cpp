@@ -3968,3 +3968,66 @@ public:
 		return true;
 	}
 };
+//819. Most Common Word
+class Solution {
+public:
+	string mostCommonWord(string paragraph, vector<string>& banned) {
+		vector<string> vec;
+		string token;
+		int max_val = 0;
+		string max_str;
+        paragraph += '.';
+		unordered_map<string, int> map;
+		for (int i = 0; i < banned.size(); ++i)
+		{
+			map[banned[i]] = -1;
+		}
+		makeString(paragraph, vec);
+		for (int i = 0; i < vec.size(); ++i)
+		{
+			if (map[vec[i]] == -1)
+			{
+				continue;
+			}
+			else if (map.find(vec[i]) != map.end())
+			{
+				map[vec[i]] ++;
+			}
+			else
+			{
+				map[vec[i]] = 1;
+			}
+		}
+		for (auto i = map.begin(); i != map.end(); ++i)
+		{
+			if (i->second > max_val)
+			{
+				max_val = i->second;
+				max_str = i->first;
+			}
+		}
+		return max_str;
+	}
+private:
+	void makeString(string &paragraph, vector<string>& vec)
+	{
+		int start = 0, flag = 0;
+		for (int i = 0; i < paragraph.size(); i++)
+		{
+			if (isupper(paragraph[i]))
+				paragraph[i] = tolower(paragraph[i]);
+			if (!isalpha(paragraph[i]) && flag == 0)
+			{
+				//cout << paragraph.substr(start, i - start) << endl;
+				vec.push_back(paragraph.substr(start, i - start));
+				flag = 1;
+			}
+			else if (isalpha(paragraph[i]) && flag == 1)
+			{
+				start = i;
+				flag = 0;
+			}
+		}
+		return;
+	}
+};
