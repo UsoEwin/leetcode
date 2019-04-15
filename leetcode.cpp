@@ -4092,3 +4092,44 @@ public:
 		return res;
 	}
 };
+//160. Intersection of Two Linked Lists
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *end_a = headA, *end_b = headB, *ptr_a = headA, *ptr_b = headB;
+        int flag = 0;
+        if(!headA || !headB)
+            return NULL;
+        while(1)
+        {
+            if(flag > 1 && ptr_a == ptr_b)
+                break;
+            if(ptr_a -> next)
+            {
+                ptr_a = ptr_a -> next;
+            }
+            else if(!ptr_a -> next && flag <= 1)
+            {
+                flag ++;
+                end_a = ptr_a;                
+                ptr_a = headB;
+            }
+            if(ptr_b -> next)
+            {
+                ptr_b = ptr_b -> next;
+            }
+            else if(!ptr_b -> next && flag <= 1)
+            {
+                flag ++;
+                end_b = ptr_b;
+                ptr_b = headA;
+            }            
+            if(flag > 1 && end_a != end_b)
+            {
+                return NULL;
+            }
+
+        }
+        return ptr_a;
+    }
+};
