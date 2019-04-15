@@ -4030,3 +4030,65 @@ private:
 		return;
 	}
 };
+//67. Add Binary
+class Solution {
+public:
+	string addBinary(string a, string b)
+	{
+		int carry = 0, i = a.size() - 1, j = b.size() - 1;
+		string res;
+		while (i >= 0 || j >= 0)
+		{
+			if (i >= 0 && j >= 0)
+			{
+				if (a[i] == '1' && b[j] == '1')
+				{
+					res = (carry == 1 ? '1' : '0') + res;
+					carry = 1;
+				}
+				else if (a[i] == '1' || b[j] == '1')
+				{
+					res = (carry == 1 ? '0' : '1') + res;
+					carry = carry == 1 ? 1 : 0;
+				}
+				else
+				{
+					res = (carry == 1 ? '1' : '0') + res;
+					carry = 0;
+				}
+				i--, j--;
+			}
+			else if (i >= 0)
+			{
+				if (a[i] == '1')
+				{
+					res = (carry == 1 ? '0' : '1') + res;
+					carry = carry == 1 ? 1 : 0;
+				}
+				else
+				{
+					res = (carry == 1 ? '1' : '0') + res;
+					carry = 0;
+				}
+				i--;
+			}
+			else if (j >= 0)
+			{
+				if (b[j] == '1')
+				{
+					res = (carry == 1 ? '0' : '1') + res;
+					carry = carry == 1 ? 1 : 0;
+				}
+				else
+				{
+					res = (carry == 1 ? '1' : '0') + res;
+					carry = 0;
+				}
+				j--;
+			}
+		}
+		if (carry == 1)
+			res = '1' + res;
+		return res;
+	}
+};
