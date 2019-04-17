@@ -4133,3 +4133,20 @@ public:
         return ptr_a;
     }
 };
+//162. Find Peak Element
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int  l = 0, r = nums.size() - 1;
+        
+        while(l < r)
+        {
+            int target = l + (r - l)/2;
+            if(nums[target] > nums[target + 1])
+                r = target;
+            else 
+                l = target + 1;
+        }
+        return l;
+    }
+};
