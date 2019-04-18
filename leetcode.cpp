@@ -4150,3 +4150,21 @@ public:
         return l;
     }
 };
+//800. Similar RGB Color
+class Solution {
+public:
+    string similarRGB(string color) {
+        return ("#" + segStr(stoi(color.substr(1,2),NULL,16)) + segStr(stoi(color.substr(3,2),NULL,16)) + segStr(stoi(color.substr(5,2),NULL,16)));
+    }
+private:
+    string segStr(int val)
+    {
+        val = val/17 + (val % 17 > 8 ? 1 : 0);
+        std::stringstream stream;
+        stream << std::hex << val*17;
+        std::string result( stream.str() );
+        if(result[0] == '0')
+            result += '0';
+        return result;
+    }
+};
