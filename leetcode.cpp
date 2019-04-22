@@ -4214,3 +4214,25 @@ public:
 		return false;
 	}
 };
+//734. Sentence Similarity
+class Solution {
+public:
+    bool areSentencesSimilar(vector<string>& words1, vector<string>& words2, vector<pair<string, string>> pairs) {
+        if(words1.size() != words2.size())
+            return false;
+        unordered_set<string> similarity;
+        for(auto x : pairs)
+        {
+            similarity.insert(x.first + "#" + x.second);
+            similarity.insert(x.second + "#" + x.first);
+        }
+        for(int i = 0; i < words1.size(); ++i)
+        {
+            if(words1[i] != words2[i] && similarity.find(words1[i] + "#" + words2[i]) == similarity.end() && similarity.find(words2[i] + "#" + words1[i]) == similarity.end())
+            {   
+                return false;
+            }
+        }
+        return true;
+    }
+};
