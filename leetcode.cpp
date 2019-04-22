@@ -4168,3 +4168,22 @@ private:
         return result;
     }
 };
+//747. Largest Number At Least Twice of Others
+class Solution {
+public:
+    int dominantIndex(vector<int>& nums) {
+        int idx = 0;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            if(nums[idx] < nums[i])
+                idx = i;
+        }
+        long long max = nums[idx];
+        for(auto x : nums)
+        {
+            if(x * 2 > max && x != max)
+                return -1;
+        }
+        return idx;
+    }
+};
