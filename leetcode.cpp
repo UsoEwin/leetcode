@@ -4187,3 +4187,30 @@ public:
         return idx;
     }
 };
+//796. Rotate String
+class Solution {
+public:
+	bool rotateString(string A, string B) {
+		if (A.size() != B.size())
+			return false;
+		string testB = B + B;
+		cout << testB << endl;
+		for (int i = 0; i < testB.size() + 1; ++i)
+		{
+			if (testB[i] == A[0])
+			{
+				int j = 0;
+				for (; j < A.size(); ++j)
+				{
+					if (testB[i + j] != A[j])
+						break;
+				}
+				if (j == A.size())
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+};
