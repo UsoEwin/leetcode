@@ -4236,3 +4236,50 @@ public:
         return true;
     }
 };
+//150. Evaluate Reverse Polish Notation
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> stk;
+        for(int i = 0; i < tokens.size(); ++i)
+        {
+            if(isdigit(tokens[i][0]) || (tokens[i][0] == '-' && isdigit(tokens[i][1])))
+            {
+                stk.push(atoi(tokens[i].c_str()));
+            }
+            else if(tokens[i][0] == '+')
+            {
+                int val1 = stk.top();
+                stk.pop();
+                int val2 = stk.top();
+                stk.pop();
+                stk.push(val2+val1);
+            }
+            else if(tokens[i][0] == '-')
+            {
+                int val1 = stk.top();
+                stk.pop();
+                int val2 = stk.top();
+                stk.pop();
+                stk.push(val2-val1);
+            }
+            else if(tokens[i][0] == '*')
+            {
+                int val1 = stk.top();
+                stk.pop();
+                int val2 = stk.top();
+                stk.pop();
+                stk.push(val2*val1);                
+            }
+            else if(tokens[i][0] == '/')
+            {
+                int val1 = stk.top();
+                stk.pop();
+                int val2 = stk.top();
+                stk.pop();
+                stk.push(val2/val1);                      
+            }
+        }
+        return stk.top();
+    }
+};
