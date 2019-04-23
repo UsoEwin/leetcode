@@ -4283,3 +4283,54 @@ public:
         return stk.top();
     }
 };
+//874. Walking Robot Simulation
+class Solution {
+public:
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
+        vector<int> dx = {0, 1, 0, -1};
+        vector<int> dy = {1, 0, -1, 0};
+        int x = 0, y = 0, face_x = 0, face_y = 0;
+        unordered_set<string> obs;
+        int res = 0;
+        for(int i = 0; i < obstacles.size(); ++i)
+        {
+            obs.insert(to_string(obstacles[i][0]) + "#" + to_string(obstacles[i][1]));
+        }
+        for(int i = 0; i < commands.size(); ++i)
+        {
+            //check the direction
+            if(commands[i] == -2)
+            {
+                face_x = (face_x + 3) % 4;
+                face_y = (face_y + 1) % 4;
+            }
+            else if(commands[i] == -1)
+            {
+                face_x = (face_x + 1) % 4;
+                face_y = (face_y + 3) % 4;
+            }
+            else
+            {
+                //simulate walking
+                int steps = commands[i];
+                while(steps > 0)
+                {
+                    //step further
+                    steps--;
+                    x += dx[face_x];
+                    y += dy[face_y];
+                    //check barrier
+                    if(obs.find(to_string(x) + "#" + to_string(y)) != obs.end())
+                    {
+                        x -= dx[face_x];
+                        y -= dy[face_y];     
+                        break;
+                    }
+                }
+                res = max(res, x*x + y*y);
+            }
+        }
+        return res;
+    }
+    
+};
