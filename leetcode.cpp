@@ -4334,3 +4334,17 @@ public:
     }
     
 };
+//190. Reverse Bits
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        bitset<32> bits_n(n);
+        for(int i = 0 ; i < 16; ++i)
+        {
+            uint32_t temp = bits_n[i];
+            bits_n[i] = bits_n[31-i];
+            bits_n[31-i] = temp;
+        }
+        return bits_n.to_ulong();
+    }
+};
