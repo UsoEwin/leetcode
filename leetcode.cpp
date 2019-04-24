@@ -4365,3 +4365,23 @@ public:
 		return -1;
 	}
 };
+//459. Repeated Substring Pattern
+class Solution {
+public:
+	bool repeatedSubstringPattern(string& s) {
+		int i = 0, j = 1, n = s.size();
+		vector<int> dp(n + 1);
+		while (j < n) {
+			if (s[i] == s[j]) {
+				dp[++j] = ++i;
+			}
+			else if (i) {
+				i = dp[i];
+			}
+			else {
+				++j;
+			}
+		}
+		return dp[n] and dp[n] % (n - dp[n]) == 0;
+	}
+};
