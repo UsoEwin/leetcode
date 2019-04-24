@@ -4348,3 +4348,20 @@ public:
         return bits_n.to_ulong();
     }
 };
+//686. Repeated String Match
+class Solution {
+public:
+	int repeatedStringMatch(string A, string B) {
+		string s = A;
+		int cnt = 1;
+		while (s.size() < B.size())
+		{
+			s += A;
+			cnt++;
+		}
+		if (s.find(B) != string::npos) return cnt;
+		s += A;
+		if (s.find(B) != string::npos) return cnt + 1;
+		return -1;
+	}
+};
