@@ -4385,3 +4385,41 @@ public:
 		return dp[n] and dp[n] % (n - dp[n]) == 0;
 	}
 };
+//252. Meeting Rooms
+class Solution {
+public:
+    bool canAttendMeetings(vector<vector<int>>& intervals) {
+        if(intervals.size() == 0) return true;
+        sort(intervals.begin(),intervals.end(),sortVec);
+        for(int i = 0; i < intervals.size() - 1; ++i)
+            if(intervals[i][1] > intervals[i+1][0])
+                return false;
+        return true;
+    }
+    static bool sortVec(vector<int> a, vector<int> b)
+    {
+        return a[0] < b[0];
+    }
+};
+//240. Search a 2D Matrix II
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if(matrix.size() < 1) return false;
+        int row = matrix.size() - 1, col = 0;
+        while(row >= 0 && col < matrix[0].size())
+        {
+            if(matrix[row][col] == target)
+                return true;
+            else if(matrix[row][col] > target)
+            {
+                row--;
+            }
+            else if(matrix[row][col] < target)
+            {
+                col++;
+            }
+        }
+        return false;
+    }
+};
