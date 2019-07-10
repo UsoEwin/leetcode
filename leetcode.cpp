@@ -4443,3 +4443,38 @@ public:
 		return false;
 	}
 };
+//56. Merge Intervals
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) 
+    {
+        //sort the array
+        sort(intervals.begin(),intervals.end(),sortVec);
+        vector<vector<int>> res;
+        if(intervals.size() < 1)
+            return intervals;
+        vector<int> curr(2);
+        curr[0] = intervals[0][0];
+        curr[1] = intervals[0][1];
+        for(int j = 0; j < intervals.size(); ++j)
+        {
+            if(intervals[j][0] > curr[1])
+            {
+                res.push_back(curr);
+                curr[0] = intervals[j][0];
+                curr[1] = intervals[j][1];
+            }
+            else
+            {
+                curr[1] = max(curr[1],intervals[j][1]);
+            }
+        }
+        res.push_back(curr);
+        return res;
+    }
+private:
+    static bool sortVec(const vector<int> &a, const vector<int> &b)
+    {
+        return (a[0] < b[0]);
+    }
+};
