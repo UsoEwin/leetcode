@@ -4493,3 +4493,19 @@ public:
         return last_pos == 0;
     }
 };
+//45. Jump Game II
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int curr_range = 0, next_range = 0, steps = 0;
+        for(int i = 0; i < nums.size(); ++i) {
+            if(curr_range < i)
+            {
+                curr_range = next_range;
+                steps++;
+            }
+            next_range = max(nums[i] + i,next_range);
+        }
+        return steps;
+    }
+};
