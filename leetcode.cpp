@@ -4527,3 +4527,30 @@ public:
         return idx == len;
     }
 };
+//582. Kill Process
+class Solution {
+public:
+    vector<int> killProcess(vector<int>& pid, vector<int>& ppid, int kill) {
+        //insert the ppid to map
+        unordered_map<int,vector<int>> map;
+        for(int i = 0; i < ppid.size(); ++i) {
+            if(ppid[i] > 0) {
+                map[ppid[i]].push_back(pid[i]);
+            }
+        }
+        vector<int> res;
+        res.push_back(kill);
+        findAllProcess(map,res,kill);
+        return res;
+    }
+private:
+    void findAllProcess(unordered_map<int,vector<int>>& map, vector<int>& res, int kill) {
+        if(map.find(kill) != map.end()) {
+            for(int i : map[kill]) {
+                res.push_back(i);
+                findAllProcess(map,res,i);
+            }
+        }
+        return;
+    }
+};
