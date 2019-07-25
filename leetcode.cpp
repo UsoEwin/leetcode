@@ -4509,3 +4509,21 @@ public:
         return steps;
     }
 };
+//946. Validate Stack Sequences
+//greedy, must pop the element now instead of later
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        stack<int> stk;
+        int len = pushed.size();
+        int idx = 0;
+        for(int x : pushed) {
+            stk.push(x);
+            while(!stk.empty() && idx < len && stk.top() == popped[idx]) {
+                idx++;
+                stk.pop();
+            }
+        }
+        return idx == len;
+    }
+};
