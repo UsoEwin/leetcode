@@ -4626,7 +4626,7 @@ public:
                     hd = mid+1;
             }
             else {
-                if(nums[mid] < target && target <= nums[last])
+                if(nums[mid] < target && target <= nums[tl-1])
                     hd = mid+1;
                 else
                     tl = mid;
