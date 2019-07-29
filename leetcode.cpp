@@ -4579,3 +4579,20 @@ private:
             return 0;
     }
 };
+//1137. N-th Tribonacci Number
+class Solution {
+public:
+    int tribonacci(int n) {
+        long long f0 = 0, f1 = 1, f2 = 1;
+        if(n == 0) return f0;
+        else if(n == 1) return f1;
+        else if(n == 2) return f2;
+        for(int i = 2; i < n; ++i) {
+            long long next = f0 + f1 + f2;
+            f0 = f1;
+            f1 = f2;
+            f2 = next;
+        }
+        return f2;
+    }
+};
