@@ -4609,3 +4609,29 @@ public:
         return idx;
     }
 };
+//33. Search in Rotated Sorted Array
+//need to learn discuss in different situation.
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int hd = 0, tl = nums.size();
+        while(hd < tl) {
+            int mid = hd + (tl-hd)/2;
+            if(nums[mid] == target)
+                return mid;
+            if(nums[hd] < nums[mid]) {
+                if(nums[hd] <= target && target < nums[mid])
+                    tl = mid;
+                else
+                    hd = mid+1;
+            }
+            else {
+                if(nums[mid] < target && target <= nums[last])
+                    hd = mid+1;
+                else
+                    tl = mid;
+            }
+        }
+        return -1;
+    }
+};
