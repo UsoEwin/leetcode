@@ -4562,3 +4562,20 @@ public:
                 && (min(rec1[3],rec2[3]) > max(rec1[1],rec2[1]));
     }
 };
+//223. Rectangle Area
+class Solution {
+public:
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        long long ans =(long long)(abs(C-A) * abs(D-B)) + (long long)(abs(G-E) * abs(H-F))
+            - computeOverlapped(A,B,C,D,E,F,G,H);
+        return ans;
+    }
+private:
+    long long computeOverlapped(int A, int B, int C, int D, int E, int F, int G, int H) {
+        long long ans = (min(C,G) - max(A,E)) * (min(D,H) - max(B,F));
+        if(min(C,G) > max(A,E) && min(D,H) > max(B,F))
+            return ans;
+        else
+            return 0;
+    }
+};
