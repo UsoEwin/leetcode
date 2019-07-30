@@ -4692,3 +4692,18 @@ public:
         return max(max1*max2*max3,max1*min1*min2);
     }
 };
+//152. Maximum Product Subarray
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        vector<long long> dp_max(nums.size(),nums[0]);
+        vector<long long> dp_min(nums.size(),nums[0]);
+        long long max_val = dp_max[0];
+        for(int i = 1; i < nums.size(); ++i) {
+            dp_max[i] = max(dp_min[i-1]*nums[i],max(nums[i]*dp_max[i-1],(long long)nums[i]));
+            dp_min[i] = min(dp_min[i-1]*nums[i],min(nums[i]*dp_max[i-1],(long long)nums[i]));
+            max_val = max(max_val,dp_max[i]);
+        }
+        return max_val;
+    }
+};
