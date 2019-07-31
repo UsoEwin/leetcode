@@ -4728,3 +4728,25 @@ public:
         return min_val;
     }
 };
+//154. Find Minimum in Rotated Sorted Array II
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int min_val = nums[0];
+        int lo = 0, hi = nums.size();
+        while(lo < hi) {
+            int mid = lo + (hi-lo)/2;
+            min_val = nums[mid] < min_val ? nums[mid] : min_val;
+            if(nums[lo] < nums[mid]) {
+                min_val = nums[lo] < min_val ? nums[lo] : min_val;
+                lo = mid+1;
+            }
+            else if(nums[lo] > nums[mid]) {
+                hi = mid;
+            }
+            else
+                lo++;
+        }
+        return min_val;
+    }
+};
