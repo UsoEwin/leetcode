@@ -4750,3 +4750,32 @@ public:
         return min_val;
     }
 };
+//4. Median of Two Sorted Arrays
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size(), n = nums2.size();
+        int tot = m + n;
+        if(tot&0x1 == 1) //odd
+            return findkth(nums1.begin(),m,nums2.begin(),n,tot/2+1);
+        else
+            return (findkth(nums1.begin(),m,nums2.begin(),n,tot/2) + findkth(nums1.begin(),m,nums2.begin(),n,tot/2+1))/2.0;
+    }
+private:
+    static int findkth(std::vector<int>::iterator A, int m, std::vector<int>::iterator B, int n, int k) {
+        if(m > n)
+            return findkth(B,n,A,m,k);
+        else if(m == 0)
+            return *(B+k-1);
+        else if(k == 1)
+            return std::min(*A,*B);
+        int ia = min(k/2,m);
+        int ib = k-ia;
+        if(*(A+ia-1) > *(B+ib-1))
+            return findkth(A,m,B+ib,n-ib,k-ib);
+        else if(*(A+ia-1) < *(B+ib-1))
+            return findkth(A+ia,m-ia,B,n,k-ia);
+        else
+            return *(A+ia-1);
+    }
+};
