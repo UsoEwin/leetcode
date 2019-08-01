@@ -4854,3 +4854,30 @@ public:
         return dp[m][n];
     }
 };
+//161. One Edit Distance
+class Solution {
+public:
+    bool isOneEditDistance(string s, string t) {
+        if(s.size() > t.size())
+           return isOneEditDistance(t,s);
+        int diff = t.size() - s.size(), n = s.size();
+        int cnt = 0;
+        if(diff > 1) return false;
+        
+        else if(diff == 1) {
+            for(int i = 0; i < n; ++i) {
+                if(s[i] != t[i])
+                    return t.substr(i+1)==s.substr(i);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < n; ++i) {
+                if(s[i]!=t[i])
+                    cnt++;
+            }
+            return cnt == 1;
+        }
+        return diff == 1;
+    }
+};
