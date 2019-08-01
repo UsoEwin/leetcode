@@ -4790,8 +4790,8 @@ public:
             int left = i+1, right = nums.size()-1;
             while(left < right) {
                 long long sum = nums[i] + nums[left] + nums[right];
-                if(res == target)
-                    return res;
+                if(sum == target)
+                    return target;
                 if(abs(sum-target) < d) {
                     d = abs(sum-target);
                     res = sum;
@@ -4803,5 +4803,28 @@ public:
             }
         }
         return res;
+    }
+};
+//170. Two Sum III - Data structure design
+class TwoSum {
+public:
+    /** Initialize your data structure here. */
+    unordered_map<int,int> map;
+    TwoSum() {
+    }
+    
+    /** Add the number to an internal data structure.. */
+    void add(int number) {
+        ++map[number];
+    }
+    
+    /** Find if there exists any pair of numbers which sum is equal to the value. */
+    bool find(int value) {
+        for(auto i : map) {
+            int t = value - i.first;
+            if((t == i.first && i.second > 1) || (t!=i.first && map.count(t)))
+                return true;
+        }
+        return false;
     }
 };
