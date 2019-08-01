@@ -4779,3 +4779,29 @@ private:
             return *(A+ia-1);
     }
 };
+//16. 3Sum Closest
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        long long d = INT_MAX;
+        int res = target;
+        for(int i = 0; i < nums.size(); ++i) {
+            int left = i+1, right = nums.size()-1;
+            while(left < right) {
+                long long sum = nums[i] + nums[left] + nums[right];
+                if(res == target)
+                    return res;
+                if(abs(sum-target) < d) {
+                    d = abs(sum-target);
+                    res = sum;
+                }
+                if(sum > target)
+                    right--;
+                else
+                    left++;
+            }
+        }
+        return res;
+    }
+};
