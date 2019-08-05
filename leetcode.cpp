@@ -4881,3 +4881,88 @@ public:
         return diff == 1;
     }
 };
+/*
+ * @lc app=leetcode id=274 lang=cpp
+ *
+ * [274] H-Index
+ */
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        sort(citations.begin(),citations.end());
+        int res = 0, n = citations.size(), i = 0;
+        while(i < n && citations[n-1-i] > i) {
+            i++;
+        }
+        return i;
+    }
+};
+/*
+ * @lc app=leetcode id=275 lang=cpp
+ *
+ * [275] H-Index II
+ */
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        int l = 0, r = citations.size();
+        int num = r;
+        while(l < r) {
+            int mid = l + (r-l)/2;
+            if(citations[mid] == num-mid)
+                return num-mid;
+            else if(citations[mid] > num - mid) 
+                r = mid;
+            else
+                l = mid+1;
+        }
+        return num-l;
+    }
+};
+/*
+ * @lc app=leetcode id=110 lang=cpp
+ *
+ * [110] Balanced Binary Tree
+ */
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        if(!root) return true;
+        if(abs(getDepth(root->left)-getDepth(root->right)) > 1)
+            return false;
+        return isBalanced(root->left) && isBalanced(root->right);
+    }
+private:
+    int getDepth(TreeNode* root) {
+        if(!root) return 0;
+        int lh = getDepth(root->left);
+        int rh = getDepth(root->right);
+        return (max(lh,rh) + 1);
+    }
+};
+/*
+ * @lc app=leetcode id=122 lang=cpp
+ *
+ * [122] Best Time to Buy and Sell Stock II
+ */
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int max_profit = 0, n = prices.size();
+        for(int i = 1; i < n; ++i) {
+            if(prices[i] > prices[i-1])
+                max_profit += (prices[i]-prices[i-1]);
+        }
+        return max_profit;
+    }
+};
+
