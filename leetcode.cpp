@@ -4965,4 +4965,29 @@ public:
         return max_profit;
     }
 };
+//36. Valid Sudoku
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<unordered_map<int,int>> row_map(9);
+        vector<unordered_map<int,int>> col_map(9);
+        vector<unordered_map<int,int>> blk_map(9);
 
+        for(int i = 0; i < 9; ++i) {
+            for(int j = 0; j < 9; ++j) {
+                char val = board[i][j];
+                if(val != '.') {
+                    int num_val = val - '0';
+                    (row_map[i])[num_val]++;
+                    (col_map[j])[num_val]++;
+                    int blk = (i/3)*3 + j/3;
+                    (blk_map[blk])[num_val]++;
+                    if((row_map[i])[num_val] > 1 || (col_map[j])[num_val] > 1 || (blk_map[blk])[num_val] > 1)
+                        return false;
+                }
+            }
+        }
+        return true;
+
+    }
+};
