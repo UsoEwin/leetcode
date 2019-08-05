@@ -5033,3 +5033,10 @@ private:
         return true;
     }
 };
+//1017. Convert to Base -2
+class Solution {
+public:
+    string baseNeg2(int N) {
+        //notice devide by -2 the sign will change
+    }
+};
