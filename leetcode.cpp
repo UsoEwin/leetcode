@@ -5100,3 +5100,20 @@ public:
             }
     }
 };
+//209. Minimum Size Subarray Sum
+class Solution {
+public:
+    int minSubArrayLen(int s, vector<int>& nums) {
+        int ans = INT_MAX;
+        int left = 0, size = nums.size(); // left idx and right end
+        long long sum = 0;
+        for(int i = 0; i < size; ++i) {
+            sum += nums[i];
+            while(sum >= s) {
+                ans = min(ans,i-left+1);
+                sum -= nums[left++];
+            }
+        }
+        return ans == INT_MAX ? 0 : ans;
+    }
+};
