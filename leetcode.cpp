@@ -5117,3 +5117,27 @@ public:
         return ans == INT_MAX ? 0 : ans;
     }
 };
+//259. 3Sum Smaller
+class Solution {
+public:
+    int threeSumSmaller(vector<int>& nums, int target) {
+        // no need to remove duplicate
+        int cnt = 0;
+        int size = nums.size();
+        if(size < 3) return cnt;
+        sort(nums.begin(),nums.end());
+        for(int i = 0; i < size-2; ++i) {
+            int left = i+1, right = size-1;
+            while(left < right) {
+                long long sum = nums[i] + nums[left] + nums[right];
+                if(sum < target) {
+                    cnt += right - left;
+                    left++;
+                }
+                else
+                    right--;
+            }
+        }
+        return cnt;
+    }
+};
