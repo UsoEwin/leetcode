@@ -5038,5 +5038,36 @@ class Solution {
 public:
     string baseNeg2(int N) {
         //notice devide by -2 the sign will change
+        if(N == 0) return "0";
+        string res;
+        while(N != 0) {
+            res = to_string(N&1) + res;
+            N = -(N >> 1);
+        }
+        return res;
+    }
+};
+//1143. Longest Common Subsequence
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int n = text1.size(), m = text2.size(), res = 0;
+        if(n * m == 0) return res;
+        vector<vector<int>> dp(n+1,vector<int>(m+1));
+        
+        for(int i = 0; i <= n; ++i) dp[i][0] = 0;
+        for(int j = 0; j <= m; ++j) dp[0][j] = 0;
+        //notice 
+        for(int i = 1; i <= n; ++i) {
+            for(int j = 1; j <= m; ++j) {
+                if(text1[i-1] == text2[j-1])
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                else {
+                    dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        res = dp[n][m];
+        return res;
     }
 };
