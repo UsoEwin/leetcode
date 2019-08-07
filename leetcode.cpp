@@ -5186,3 +5186,33 @@ private:
             helper(n,res,ans+")",left,right+1);
     }
 };
+//34. Find First and Last Position of Element in Sorted Array
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> res = {-1,-1};
+        int left = 0, right = nums.size();
+        //find the left
+        while(left < right) {
+            int mid = left + (right-left)/2;
+            if(nums[mid] >= target)
+                right = mid;
+            else
+                left = mid+1;
+        }
+        if(left == nums.size() || nums[left] != target)
+            return res;
+        res[0] = left;
+        //find the right
+        left = 0, right = nums.size();
+        while(left < right) {
+            int mid = left + (right-left)/2;
+            if(nums[mid] <= target)
+                left = mid + 1;
+            else
+                right = mid;
+        }
+        res[1] = left-1;
+        return res;
+    }
+};
