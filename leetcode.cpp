@@ -5165,3 +5165,24 @@ public:
         return res;
     }
 };
+//22. Generate Parentheses
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        string ans = "";
+        helper(n,res,ans,0,0);
+        return res;
+    }
+private:
+    void helper(int n, vector<string>& res, string ans, int left, int right) {
+        if(ans.size() == 2*n) {
+            res.push_back(ans);
+            return;
+        }
+        if(left < n)
+            helper(n,res,ans+"(",left+1,right);
+        if(right < left)
+            helper(n,res,ans+")",left,right+1);
+    }
+};
