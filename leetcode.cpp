@@ -5254,3 +5254,16 @@ public:
         return dp[m-1][n-1];
     }
 };
+//343. Integer Break
+class Solution {
+public:
+    int integerBreak(int n) {
+        // check 7 to 10 see 3 is the key, need as many 3 as possible
+        if(n == 3 || n == 2) return n-1;
+        long long res = 1;
+        while(n > 4) {
+            res *= 3, n = n-3;
+        }
+        return res*n;
+    }
+};
