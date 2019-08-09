@@ -5287,3 +5287,20 @@ public:
         return m+n-2*dp[m][n];
     }
 };
+//29. Divide Two Integers
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        long long m = abs((long long)(dividend)), n = abs((long long)(divisor)), res = 0;
+        int sign = (dividend > 0) ^ (divisor > 0) ? -1 : 1;
+        while(m >= n) {
+            long long temp = n, cnt = 1;
+            while(temp << 1 <= m) {
+                temp <<=  1, cnt <<= 1;
+            }
+            res += cnt, m -= temp;
+        }
+        res = res * sign;
+        return res > INT_MAX ? INT_MAX : res;
+    }
+};
