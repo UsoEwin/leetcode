@@ -5304,3 +5304,18 @@ public:
         return res > INT_MAX ? INT_MAX : res;
     }
 };
+//714. Best Time to Buy and Sell Stock with Transaction Fee
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int cash = 0, hold = -prices[0];
+        for(int i: prices) {
+            //check if sell one
+            cash = max(cash,hold+i-fee);
+            //check if buy onbe
+            hold = max(hold,cash-i);
+        }
+        return cash;
+    }
+};
