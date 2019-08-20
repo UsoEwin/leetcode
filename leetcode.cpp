@@ -5305,7 +5305,6 @@ public:
     }
 };
 //714. Best Time to Buy and Sell Stock with Transaction Fee
-
 class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
@@ -5317,5 +5316,42 @@ public:
             hold = max(hold,cash-i);
         }
         return cash;
+    }
+};
+//679. 24 Game 
+class Solution {
+    const double eps = 1e-4;
+public:
+    bool judgePoint24(vector<int>& nums) {
+        vector<double> arr(nums.begin(),nums.end());
+        bool res = false;
+        backtrack(arr,res);
+        return res;
+    }
+private:
+    void backtrack(vector<double>& arr, bool& res) {
+        if(res) return;
+        if(arr.size() == 1 && abs(24-arr[0]) < eps) {
+            res = true;
+            return;
+        }
+        for(int i = 0; i < arr.size(); ++i) {
+            for(int j = 0; j < i; ++j) {
+                double p = arr[i], q = arr[j];
+                vector<double> temp{p+q,p*q,p-q,q-p};
+                if(q > eps) temp.push_back(p/q);
+                if(p > eps) temp.push_back(q/p);
+                arr.erase(arr.begin() + i);
+                arr.erase(arr.begin() + j);
+                for(double t : temp) {
+                    arr.push_back(t);
+                    backtrack(arr,res);
+                    arr.pop_back();
+                }
+                //notice need insert j first, like a fifo
+                arr.insert(arr.begin()+j,q);
+                arr.insert(arr.begin()+i,p);
+            }
+        }
     }
 };
