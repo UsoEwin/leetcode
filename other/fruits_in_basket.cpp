@@ -23,3 +23,7 @@ class MaxFruitCountOf2Types {
     return maxLength;
   }
 };
+
+int main(int argc, char* argv[]) {
+    
+}
