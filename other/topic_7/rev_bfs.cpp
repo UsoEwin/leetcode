@@ -18,6 +18,7 @@ public:
                     queue.push(curr->right);
                 level_res.push_back(curr->val);
             }
+            //this could be bad, modified to reverse instead
             res.insert(res.begin(),level_res);
         }
         return res;
