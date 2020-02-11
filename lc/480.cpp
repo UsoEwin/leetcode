@@ -1,4 +1,6 @@
 //lc 480
+//this so-called lazy removal method is very bad, I don't even think it's correct
+//using AVL/RB tree seems to be better
 class Solution {
 public:
     vector<double> medianSlidingWindow(vector<int>& nums, int k) {
