@@ -1,6 +1,6 @@
 //1bit comparator
 module comparator (
-    input wire a,b
+    input wire a,b,
     output wire eq
 );
 wire w1,w2;
